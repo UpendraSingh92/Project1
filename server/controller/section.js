@@ -10,7 +10,7 @@ exports.createSection = async(req,res)=>{
 
         // validate data
         if(!sectionName || !courseId) {
-            res.status(401).json({
+            return res.status(401).json({
                 sucess: false,
                 message: "Please fill all details in section",
             });
@@ -37,14 +37,13 @@ exports.createSection = async(req,res)=>{
             sucess: true,
             body:updatedCourse,
             message: "Section created sucessfully",
-            error,
         });
 
     } catch (error) {
         res.status(500).json({
             sucess: false,
             message: "something went wrong while creating Section",
-            error,
+            error:error.message,
         });
     }
 }
@@ -59,7 +58,7 @@ exports.updateSection = async(req,res)=>{
 
         // validate data
         if(!sectionName || !sectionID) {
-            res.status(401).json({
+            return res.status(401).json({
                 sucess: false,
                 message: "Please fill all details in section",
             });
@@ -94,7 +93,7 @@ exports.deleteSection = async(req,res)=>{
 
         // validate data
         if(!sectionID || !courseID) {
-            res.status(401).json({
+            return res.status(401).json({
                 sucess: false,
                 message: "Please fill all details in section",
             });

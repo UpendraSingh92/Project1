@@ -17,7 +17,7 @@ exports.resetPasswordlink = async(req,res)=>{
         // check user exist or not validation
         const user = await User.findOne({email});
         if(!user){
-            res.status(402).json({
+            return res.status(402).json({
                 sucess: false,
                 message: "user is not registered",
             });
@@ -40,8 +40,9 @@ exports.resetPasswordlink = async(req,res)=>{
                         `passwor reset link : ${url}`);
         
 
-        res.status(500).json({
-            sucess: false,
+        res.status(200).json({
+            sucess: true,
+            body:mail,
             message: "rest password mail send sucessfully",
         });
     } catch (error) {
@@ -67,7 +68,7 @@ exports.resetPassword = async (req,res)=>{
             !confirmPassword ||
             !token
           ) {
-            res.status(401).json({
+            return res.status(401).json({
               sucess: false,
               message: "please fill all detail",
             });
@@ -75,7 +76,7 @@ exports.resetPassword = async (req,res)=>{
 
           // match password
           if (password !== confirmPassword) {
-            res.status(401).json({
+            return res.status(401).json({
               sucess: false,
               message: "Password not match with confirm Password",
             });
@@ -86,7 +87,7 @@ exports.resetPassword = async (req,res)=>{
 
         // if token not available means no mail has been send
         if (!existUser) {
-            res.status(401).json({
+            return res.status(401).json({
             sucess: false,
             message: "Invalid token for reset password",
             });
@@ -94,7 +95,7 @@ exports.resetPassword = async (req,res)=>{
 
         // else if time expire
         if(existUser.tokenExpire < Date.now()){
-            res.status(401).json({
+            return res.status(401).json({
                 sucess: false,
                 message: "Reset password token is expired",
                 });

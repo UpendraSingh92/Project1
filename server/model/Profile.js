@@ -4,7 +4,6 @@ const profileSchema = new mongoose.Schema({
     gender:{
         type:String,
         trim:true,
-        required:true,
     },
     dateOfBirth:{
         type:String,
@@ -12,7 +11,6 @@ const profileSchema = new mongoose.Schema({
     },
     contactNumber:{
         type:Number,
-        required:true,
         trim:true,
     },
     about:{

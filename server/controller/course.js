@@ -8,59 +8,62 @@ exports.createCourse = async(req,res)=>{
     try {
 
         // fetch data
-        const {courseName, description, price, whatYouWillLearn, tag, instructions ,status, category} = req.body;
+        const {courseName, description, price, whatYouWillLearn, tag, instructions , category} = req.body;
+
+        let status = req.body.status;
 
         // handle status
         if (!status || status === undefined) {
-			status = "Draft";
+            status = "Draft";
 		}
 
         // featch thumbnai file
         const thumbnail = req.files.thumbnailImage;
-
-
+        
         // validation
-        if(!courseName || !description || !price || !whatYouWillLearn || !category || !thumbnail || !tag || !instructions || !status){
-            res.status(401).json({
-                sucess: false,
-                message: "plaease fill all details",
+        
+       if(!courseName || !description || !price || !whatYouWillLearn || !category || !thumbnail || !tag  ){
+           return res.status(401).json({
+               sucess: false,
+               message: "plaease fill all details",
             });
         }
-
+        
         // user validation
         const userID = req.user.id;
         const instructor = await User.findById(userID);
         if(!instructor){
-            res.status(401).json({
+            return res.status(401).json({
                 sucess: false,
                 message: "user detail not found",
             });
         }
-
+        
         // fetch category
         const userCategory = await Category.findById(category);
         if(!userCategory){
-            res.status(500).json({
+            return res.status(500).json({
                 sucess: false,
                 message: "Category is Not Valid",
             });
         }
         
         // upload thumbnail
-        const thumbnaiImg = cloudinaryFileUpload(thumbnail,process.env.FOLDER_NAME,);
-
+        //const thumbnailImg = await cloudinaryFileUpload(thumbnail,process.env.FOLDER_NAME,);
+        let thumbnailImg = {secure_url:"hfaf"}
+        
         // create entry in DB 
         const newCourse = await Course.create({
             courseName,
             description,
             whatYouWillLearn,
             price,
-            category:userCategory,
-            thumbnail:thumbnaiImg.secure_url,
-            instructor:userID,
-            tag,
+            category: userCategory._id,
+            thumbnail:thumbnailImg.secure_url,
+            instructor: instructor._id,
+            tag:tag,
             instructions,
-            status,
+            status:status,
         }); 
 
         // add course in instructor schema--> what course instructor is created
@@ -79,17 +82,18 @@ exports.createCourse = async(req,res)=>{
                 }
             },{new:true});
 
-            res.status(200).json({
+            return res.status(200).json({
                 sucess: true,
                 message: "course created sucessfully",
-                data:createCourse,
+                data:newCourse,
             });
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             sucess: false,
             message: "something went wrong while creating course",
-            error,
+            error:error.message,
         });
     }
 }
@@ -138,7 +142,7 @@ exports.courseDetail = async(req,res)=>{
 
         // validate data
         if(!courseId ) {
-            res.status(401).json({
+            return res.status(401).json({
                 sucess: false,
                 message: "Please fill course details valid",
             });
@@ -160,7 +164,7 @@ exports.courseDetail = async(req,res)=>{
         }).exec();
 
         if(!fullCourse){
-            res.status(401).json({
+            return res.status(401).json({
                 sucess: false,
                 message: "Course full detail not found",
             });

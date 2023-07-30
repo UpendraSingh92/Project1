@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const {mailSender} = require("../utils/mailSender")
 require("dotenv").config();
 
-// otp Send
+// otp Send for signUp
 exports.sendOTP = async (req, res) => {
   try {
     // fetch email
@@ -46,8 +46,8 @@ exports.sendOTP = async (req, res) => {
 
     const payload = { email, otp };
 
-    const otpBody = await new OTP.create(payload);
-    console.log(otpBody);
+    const otpBody = await OTP.create(payload);
+    // console.log(otpBody);
 
     res.status(200).json({
       sucess: true,
@@ -57,7 +57,7 @@ exports.sendOTP = async (req, res) => {
     res.status(500).json({
       sucess: false,
       message: "error on sending Verifiation OTP",
-      error: error,
+      error,
     });
   }
 };
@@ -121,9 +121,11 @@ exports.signUp = async (req, res) => {
         sucess: false,
         message: "OTP not Found",
       });
-    } else if (otp !== recentOtp) {
+    } 
+    if (Number(otp) !== recentOtp.otp) {
       // match otp
-      res.status(401).json({
+      console.log(typeof(otp)," ",typeof(recentOtp.otp));
+      return res.status(401).json({
         sucess: false,
         message: "OTP not Match",
       });
@@ -151,6 +153,7 @@ exports.signUp = async (req, res) => {
       image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
     });
 
+    console.log("signup")
     res.status(200).json({
       sucess: true,
       message: "SignUp Sucessful",
@@ -187,7 +190,7 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email }).populate("additionalDetail").exec();
 
     if (!user) {
-      res.status(401).json({
+      return res.status(401).json({
         sucess: false,
         message: "User not found",
       });

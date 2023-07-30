@@ -1,5 +1,6 @@
 const Profile = require("../model/Profile");
 const User = require("../model/User");
+const { cloudinaryFileUpload } = require("../utils/fileUpload");
 
 // update profile because we already created when we create user and give all value are null so now we need to update
 exports.updateProfile = async (req,res)=>{
@@ -11,7 +12,7 @@ exports.updateProfile = async (req,res)=>{
 
         // validate data
         if(!gender || !contactNumber ){
-            res.status(401).json({
+            return res.status(401).json({
                 sucess: false,
                 message: "Please fill all detail in profile",
             });
@@ -65,6 +66,10 @@ exports.deleteProfile = async (req,res)=>{
 
         // TODO : remove student from enrolled courses
         // how can we schedule deleting an account --> CRON jobs
+        // TODO: Find More on Job Schedule
+		    // const job = schedule.scheduleJob("10 * * * * *", function () {
+    		// 	console.log("The answer to life, the universe, and everything!");
+		    // });
         res.status(200).json({
             sucess: true,
             message: "Profile deleted sucessfully",
@@ -103,3 +108,61 @@ exports.getUserAllDetails = async (req,res)=>{
         });
     }
 }
+
+
+exports.updateDisplayPicture = async (req, res) => {
+    try {
+      const displayPicture = req.files.displayPicture
+      // console.log(res);
+      const userId = req.user.id
+      const image = await cloudinaryFileUpload(
+        displayPicture,
+        process.env.FOLDER_NAME,
+        1000,
+        100
+      )
+      console.log(image)
+      const updatedProfile = await User.findByIdAndUpdate(
+        { _id: userId },
+        { image: image.secure_url },
+        { new: true }
+      )
+      res.send({
+        success: true,
+        message: `Image Updated successfully`,
+        data: updatedProfile,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message:"something went wrong while update Profile picture",
+        error: error.message,
+      })
+    }
+};
+  
+exports.getEnrolledCourses = async (req, res) => {
+    try {
+      const userId = req.user.id
+      const userDetails = await User.findOne({
+        _id: userId,
+      })
+        .populate("courses")
+        .exec()
+      if (!userDetails) {
+        return res.status(404).json({
+          success: false,
+          message: `Could not find user with id: ${userDetails}`,
+        })
+      }
+      return res.status(200).json({
+        success: true,
+        data: userDetails.course,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      })
+    }
+};

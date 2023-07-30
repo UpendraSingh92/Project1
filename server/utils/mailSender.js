@@ -19,10 +19,10 @@ const mailSender = async(email,title,body)=>{
             // html:<p>Your OTP is</p>
         });
 
-        console.log(info);
+        // console.log(info);
         return info;
     } catch (error) {
-        console.log("error in sending mail ",err);
+        console.log("error in sending mail ",error);
     }
 }
 
