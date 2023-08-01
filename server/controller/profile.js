@@ -47,7 +47,7 @@ exports.updateProfile = async (req,res)=>{
             message: "something went wrong while creating Profile",
             error,
         });
-    }
+    } 
 }
 
 
