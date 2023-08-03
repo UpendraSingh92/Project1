@@ -3,6 +3,8 @@ html,body{
     overflow-x: hidden;
 }
 
-video-shadow{
-    box-shadow: 5px 10px #888888;
+.homepage-bg{
+    background-image: url("./assets/Images/bghome.svg");
+    width: 100%;
+    /* background-repeat: no-repeat; */
 }
