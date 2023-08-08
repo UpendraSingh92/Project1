@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
 import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
 import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../../services/operation/authAPI";
+import { useDispatch } from "react-redux";
 
 export default function LoginForm() {
-  const [islogin,setIsLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   function changeHandler(event) {
@@ -18,9 +19,8 @@ export default function LoginForm() {
 
   function submitHandler(event){
     event.preventDefault();
-      setIsLogin(true);
-      toast.success("Logged In SucessFul");
-      navigate("/");
+    dispatch(login(formData.email,formData.password,navigate));
+    
   }
   return (
       <div>
@@ -60,7 +60,7 @@ export default function LoginForm() {
             className='bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b border-richblack-200'
           />
 
-          <Link to="#">
+          <Link to="/forgotpassword">
             <p className='text-xs mt-0 ml-auto text-blue-100 font-semibold max-w-max '>Forget Password</p>
           </Link>
 

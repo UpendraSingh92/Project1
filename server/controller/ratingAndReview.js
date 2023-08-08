@@ -14,7 +14,7 @@ exports.createRating = async(req,res)=>{
         // validate data
         if(!rating || !review || !courseId || !userId) {
             res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill all details in rating",
             });
         }
@@ -27,14 +27,14 @@ exports.createRating = async(req,res)=>{
 
         if(course){
             res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "student is not enrolled in course",
             });
         }
         /*
         if(!course.studentEnrolled.includes(userId)){
             res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "student is not enrolled in course",
             });
         }
@@ -45,7 +45,7 @@ exports.createRating = async(req,res)=>{
 
         if(alreadyReviewed){
             res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "You alreadey give the rating",
             });
         }
@@ -60,14 +60,14 @@ exports.createRating = async(req,res)=>{
             },
         })
         res.status(200).json({
-            sucess: true,
+            success: true,
             body:newRating,
-            message: "Rating created sucessfully",
+            message: "Rating created successfully",
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while Rating to course",
             error,
         });
@@ -83,7 +83,7 @@ exports.avergeRating = async(req,res)=>{
         // validate data
         if(!courseId ) {
             res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill course details valid",
             });
         }
@@ -124,15 +124,15 @@ exports.avergeRating = async(req,res)=>{
         */
 
         res.status(200).json({
-            sucess: true,
+            success: true,
             body:allRating,
             average: avgRating,
-            message: "Rating fetched sucessfully",
+            message: "Rating fetched successfully",
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while fetching all Rating",
             error,
         });
@@ -150,7 +150,7 @@ exports.getAllRating = async(req,res)=>{
         // validate data
         if(!courseId ) {
             res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill course details valid",
             });
         }
@@ -171,14 +171,14 @@ exports.getAllRating = async(req,res)=>{
         //.populate(["user", "course"]).exec();;
 
         res.status(200).json({
-            sucess: true,
+            success: true,
             body:allRating,
-            message: "Rating fetched sucessfully",
+            message: "Rating fetched successfully",
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while fetching all Rating",
             error,
         });

@@ -19,7 +19,7 @@ exports.capturePayment = async (req, res) => {
 
         if(!courseId){
             res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Invalid Course Id",
             });
         }
@@ -29,7 +29,7 @@ exports.capturePayment = async (req, res) => {
 
         if(!course){
             res.status(404).json({
-                sucess: false,
+                success: false,
                 message: "Course Data Not Found",
             });
         }
@@ -40,7 +40,7 @@ exports.capturePayment = async (req, res) => {
         // user already purchased or not
         if(course.studentEnrolled.includes(userObjId)){
             res.status(301).json({
-                sucess: false,
+                success: false,
                 message: "User already enrolled in course",
             });
         }
@@ -66,8 +66,8 @@ exports.capturePayment = async (req, res) => {
         console.log(orderResponse);
 
         res.status(200).json({
-            sucess: true,
-            message: "Order created sucessful",
+            success: true,
+            message: "Order created successful",
             courseName : course.courseName,
             courseDescription : course.description,
             thumbnail : course.thumbnail,
@@ -79,7 +79,7 @@ exports.capturePayment = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while Creating course order",
             error,
         });
@@ -122,7 +122,7 @@ exports.signatureVerify = async(req,res)=>{
 
             if(!enrollCourse){
                 res.status(500).json({
-                    sucess: false,
+                    success: false,
                     message: "course not found while enrolling student",
                 });
             }
@@ -139,7 +139,7 @@ exports.signatureVerify = async(req,res)=>{
 
             if(!enrollStudent){
                 res.status(500).json({
-                    sucess: false,
+                    success: false,
                     message: "student not found while enrolling in course",
                 });
             }
@@ -147,18 +147,18 @@ exports.signatureVerify = async(req,res)=>{
 
             // mail send
             const mailRes = mailSender(enrollStudent.email
-                                        ,"Congratulation You Enrolled in WebDev Course sucessfully",
+                                        ,"Congratulation You Enrolled in WebDev Course successfully",
                                         mailTemplate(enrollCourse.courseName,enrollStudent.firstName +" "+enrollStudent.lastName));
 
             console.log(mailRes);
             res.status(400).json({
-                sucess: true,
-                message: "signature verified and Course purchase sucessfully",
+                success: true,
+                message: "signature verified and Course purchase successfully",
             });
 
         } catch (error) {
             res.status(500).json({
-                sucess: false,
+                success: false,
                 message: "something went wrong while enrolling student",
                 error,
             });
@@ -167,7 +167,7 @@ exports.signatureVerify = async(req,res)=>{
         else{
             // signature not matched
             res.status(500).json({
-                sucess: false,
+                success: false,
                 message: "something went wrong while verifying signature", 
             });
         }

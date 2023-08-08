@@ -12,7 +12,7 @@ exports.createCategory = async (req, res) => {
     // validate data
     if(!name || !description){
         return res.status(401).json({
-            sucess: false,
+            success: false,
             message: "please fill all details",
         });
     }
@@ -21,14 +21,14 @@ exports.createCategory = async (req, res) => {
     const newCategory = await Category.create({name,description});
 
     res.status(200).json({
-        sucess: true,
+        success: true,
         category:newCategory,
-        message: "Category created sucessfully",
+        message: "Category created successfully",
     });
 
   } catch (error) {
     res.status(500).json({
-        sucess: false,
+        success: false,
         message: "Internal server error in creating category",
         error:error.message,
     });
@@ -45,14 +45,14 @@ exports.showAllCategory = async (req, res) => {
       const newCategory = await Category.find({},{name:true,description:true});
   
       res.status(200).json({
-          sucess: true,
+          success: true,
           category:newCategory,
-          message: "all Category fetch sucessfully",
+          message: "all Category fetch successfully",
       });
   
     } catch (error) {
       res.status(500).json({
-          sucess: false,
+          success: false,
           message: "Internal server error in fetching all category",
           error,
       });
@@ -74,7 +74,7 @@ exports.categoryPageDetail = async(req,res)=>{
     // validate
     if(!categoryCourses){
       return res.status(404).json({
-        sucess: false,
+        success: false,
         message: "Category Course Not Found",
       });
     }
@@ -86,7 +86,7 @@ exports.categoryPageDetail = async(req,res)=>{
 
 
     res.status(200).json({
-      sucess: true,
+      success: true,
       data:{
         categoryCourses,
         diffCategoryCourse,
@@ -95,7 +95,7 @@ exports.categoryPageDetail = async(req,res)=>{
 
   } catch (error) {
     res.status(500).json({
-          sucess: false,
+          success: false,
           message: "Internal server error in fetching particular category course",
           error,
       });

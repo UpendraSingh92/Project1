@@ -9,7 +9,6 @@ export default function Templete({
   desc1,
   desc2,
   image,
-  setIsLogin,
   formtype,
 }) {
   return (
@@ -26,9 +25,9 @@ export default function Templete({
         </p>
 
         {formtype === "login" ? (
-          <LoginForm setIsLogin={setIsLogin} formtype={formtype} />
+          <LoginForm formtype={formtype} />
         ) : (
-          <SignupForm setIsLogin={setIsLogin} formtype={formtype} />
+          <SignupForm formtype={formtype} />
         )}
 
         <div className='flex w-full items-center my-4 gap-x-2'>

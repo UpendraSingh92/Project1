@@ -13,7 +13,7 @@ exports.updateProfile = async (req,res)=>{
         // validate data
         if(!gender || !contactNumber ){
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill all detail in profile",
             });
         }
@@ -36,14 +36,14 @@ exports.updateProfile = async (req,res)=>{
 
         // update in profile by insert this id in user
         res.status(200).json({
-            sucess: true,
-            message: "Profile created sucessfully",
+            success: true,
+            message: "Profile created successfully",
             body:profileData,
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while creating Profile",
             error,
         });
@@ -71,14 +71,14 @@ exports.deleteProfile = async (req,res)=>{
     		// 	console.log("The answer to life, the universe, and everything!");
 		    // });
         res.status(200).json({
-            sucess: true,
-            message: "Profile deleted sucessfully",
+            success: true,
+            message: "Profile deleted successfully",
             body:updateduser,
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while deleting Profile",
             error,
         });
@@ -95,14 +95,14 @@ exports.getUserAllDetails = async (req,res)=>{
         const user = await User.findById(userId).populate("additionalDetail").exec();
 
         res.status(200).json({
-            sucess: true,
-            message: "user data fetch sucessfully",
+            success: true,
+            message: "user data fetch successfully",
             body:user,
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while fetching Profile details",
             error,
         });

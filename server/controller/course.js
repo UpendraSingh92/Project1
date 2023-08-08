@@ -24,7 +24,7 @@ exports.createCourse = async(req,res)=>{
         
        if(!courseName || !description || !price || !whatYouWillLearn || !category || !thumbnail || !tag  ){
            return res.status(401).json({
-               sucess: false,
+               success: false,
                message: "plaease fill all details",
             });
         }
@@ -34,7 +34,7 @@ exports.createCourse = async(req,res)=>{
         const instructor = await User.findById(userID);
         if(!instructor){
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "user detail not found",
             });
         }
@@ -43,7 +43,7 @@ exports.createCourse = async(req,res)=>{
         const userCategory = await Category.findById(category);
         if(!userCategory){
             return res.status(500).json({
-                sucess: false,
+                success: false,
                 message: "Category is Not Valid",
             });
         }
@@ -83,15 +83,15 @@ exports.createCourse = async(req,res)=>{
             },{new:true});
 
             return res.status(200).json({
-                sucess: true,
-                message: "course created sucessfully",
+                success: true,
+                message: "course created successfully",
                 data:newCourse,
             });
 
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while creating course",
             error:error.message,
         });
@@ -119,14 +119,14 @@ exports.showAllCourse = async(req,res)=>{
         */
 
         res.status(200).json({
-            sucess: true,
-            message: "courses fetched sucessfully",
+            success: true,
+            message: "courses fetched successfully",
             data:allCourse,
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while fetching all course",
             error,
         });
@@ -143,7 +143,7 @@ exports.courseDetail = async(req,res)=>{
         // validate data
         if(!courseId ) {
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill course details valid",
             });
         }
@@ -165,20 +165,20 @@ exports.courseDetail = async(req,res)=>{
 
         if(!fullCourse){
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Course full detail not found",
             });
         }
 
         res.status(200).json({
-            sucess: true,
+            success: true,
             course:fullCourse,
-            message: "Course full detail fetch sucessful",
+            message: "Course full detail fetch successful",
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while fetching course detail",
             error,
         });

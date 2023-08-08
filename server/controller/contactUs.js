@@ -10,7 +10,7 @@ exports.contactUs = async (req, res) => {
     // validate data
     if(!firstName ||!lastName ||!phNumber ||!email || !message){
         res.status(401).json({
-            sucess: false,
+            success: false,
             message: "please fill all details",
         });
     }
@@ -26,14 +26,14 @@ exports.contactUs = async (req, res) => {
                     message : ${message}`);
 
     res.status(200).json({
-        sucess: true,
+        success: true,
         data:studentMailRes,
-        message: "contact us mail send sucessfully",
+        message: "contact us mail send successfully",
     });
 
   } catch (error) {
     res.status(500).json({
-        sucess: false,
+        success: false,
         message: "Internal server error in sending contact us mail",
         error,
     });

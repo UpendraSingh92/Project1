@@ -16,7 +16,7 @@ exports.createSubSection = async (req,res)=>{
         // validate data
         if(!title || !description  || !video || !sectionId ){
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill all detail in Sub-Section",
             });
         }
@@ -43,13 +43,13 @@ exports.createSubSection = async (req,res)=>{
             },{new:true}).populate("subSections").exec();
         
         res.status(200).json({
-            sucess: true,
-            message: "Sub-Section created sucessfully",
+            success: true,
+            message: "Sub-Section created successfully",
             body:section,
         });
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while creating Sub-Section",
             error,
         });
@@ -68,7 +68,7 @@ exports.updateSubSection = async (req,res)=>{
 
         if(!subSec){
             return res.status(404).json({
-                sucess: false,
+                success: false,
                 message: "Sub-Section not found",
             });
         }
@@ -95,13 +95,13 @@ exports.updateSubSection = async (req,res)=>{
         await subSec.save();
         
         res.status(200).json({
-            sucess: true,
-            message: "Sub-Section created sucessfully",
+            success: true,
+            message: "Sub-Section created successfully",
             body:subSec,
         });
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while Updating Sub-Section",
             error,
         });

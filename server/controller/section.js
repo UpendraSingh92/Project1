@@ -11,7 +11,7 @@ exports.createSection = async(req,res)=>{
         // validate data
         if(!sectionName || !courseId) {
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill all details in section",
             });
         }
@@ -34,14 +34,14 @@ exports.createSection = async(req,res)=>{
             }).exec();
 
         res.status(200).json({
-            sucess: true,
+            success: true,
             body:updatedCourse,
-            message: "Section created sucessfully",
+            message: "Section created successfully",
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while creating Section",
             error:error.message,
         });
@@ -59,7 +59,7 @@ exports.updateSection = async(req,res)=>{
         // validate data
         if(!sectionName || !sectionID) {
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill all details in section",
             });
         }
@@ -69,14 +69,14 @@ exports.updateSection = async(req,res)=>{
                                     {sectionName:sectionName},{new:true});
 
         res.status(200).json({
-            sucess: true,
+            success: true,
             body:updatedSection,
-            message: "Section created sucessfully",
+            message: "Section created successfully",
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while Updating Section",
             error,
         });
@@ -94,7 +94,7 @@ exports.deleteSection = async(req,res)=>{
         // validate data
         if(!sectionID || !courseID) {
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Please fill all details in section",
             });
         }
@@ -110,13 +110,13 @@ exports.deleteSection = async(req,res)=>{
         // remove section
         await Section.findByIdAndDelete(sectionID);
         res.status(200).json({
-            sucess: true,
-            message: "Section deleted sucessfully",
+            success: true,
+            message: "Section deleted successfully",
         });
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while deleting Section",
             error,
         });

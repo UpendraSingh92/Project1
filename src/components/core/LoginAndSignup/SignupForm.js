@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useDispatch,} from "react-redux";
+import { setSignUpData} from "../../../slices/authSlice"; 
+import { sendOtp, } from "../../../services/operation/authAPI";
 
 export default function SignupForm() {
-  const [islogin,setIsLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
   const navigate = useNavigate();
-  const [accountType, setAccountType] = useState("student");
+  const [accountType, setAccountType] = useState("Student");
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -25,18 +28,30 @@ export default function SignupForm() {
 
   function submitHandler(event) {
     event.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords Do Not Match")
+      return;
+    }
+
+    const signupData = {
+      ...formData,
+      accountType,
+    }
+
+    dispatch(setSignUpData(signupData));
     
-    // first check for passwor match
-    if(formData.password === formData.confirmPassword){
-    setIsLogin(true);
-    toast.success("Account Created SucessFul");
-    navigate("/");
-    }
-    else{
-      toast.error("Password Do Not Match");
-    }
+    dispatch(sendOtp(signupData.email,navigate));
 
-
+      // reset form
+      /*setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+      */
   }
   return (
     <div>
@@ -44,12 +59,12 @@ export default function SignupForm() {
       <div className="p-1 bg-richblack-700 rounded-full flex justify-between max-w-max mt-6 gap-2">
         <button
           className={`${
-            accountType === "student"
+            accountType === "Student"
               ? "bg-richblack-900 text-richblack-5"
               : "bg-tranparent text-richblack-200"
           } py-2 px-5 rounded-full transition-all duration-300`}
           onClick={() => {
-            setAccountType("student");
+            setAccountType("Student");
           }}
         >
           Student
@@ -57,12 +72,12 @@ export default function SignupForm() {
 
         <button
           className={`${
-            accountType === "instructor"
+            accountType === "Instructor"
               ? "bg-richblack-900 text-richblack-5"
               : "bg-tranparent text-richblack-200"
           } py-2 px-5 rounded-full transition-all duration-300`}
           onClick={() => {
-            setAccountType("instructor");
+            setAccountType("Instructor");
           }}
         >
           Instructor

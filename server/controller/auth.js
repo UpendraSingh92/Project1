@@ -17,8 +17,8 @@ exports.sendOTP = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user) {
-      res.status(401).json({
-        sucess: false,
+      return res.status(401).json({
+        success: false,
         message: "user already registered",
       });
     }
@@ -49,13 +49,13 @@ exports.sendOTP = async (req, res) => {
     const otpBody = await OTP.create(payload);
     // console.log(otpBody);
 
-    res.status(200).json({
-      sucess: true,
-      message: "OTP send sucessful",
-      OTP: otpBody,
+    return res.status(200).json({
+      success: true,
+      message: "OTP send successful",
+      // OTP: otpBody,
     });} catch (error) {
-    res.status(500).json({
-      sucess: false,
+    return res.status(500).json({
+      success: false,
       message: "error on sending Verifiation OTP",
       error,
     });
@@ -77,6 +77,12 @@ exports.signUp = async (req, res) => {
       otp,
     } = req.body;
 
+    console.log(firstName,
+      lastName,
+      email,
+      accountType,
+      password,
+      confirmPassword,otp,"receive at backend");
     // velidate data
     if (
       !firstName ||
@@ -87,15 +93,15 @@ exports.signUp = async (req, res) => {
       !confirmPassword ||
       !otp
     ) {
-      res.status(401).json({
-        sucess: false,
+      return res.status(401).json({
+        success: false,
         message: "please fill all detail",
       });
     }
     // match password
     if (password !== confirmPassword) {
-      res.status(401).json({
-        sucess: false,
+      return res.status(401).json({
+        success: false,
         message: "Password not match with confirm Password",
       });
     }
@@ -103,30 +109,31 @@ exports.signUp = async (req, res) => {
     // check user exist or not
     const existUser = await User.findOne({ email });
     if (existUser) {
-      res.status(401).json({
-        sucess: false,
+       return res.status(401).json({
+        success: false,
         message: "User already exist",
       });
     }
     // find most recent otp
     // createdAt:-1 for decending
 
-    const recentOtp = await OTP.findOne({ email })
-      .sort({ createdAt: -1 })
-      .limit(1);
+    const recentOtp = await OTP.find({email}).sort({ createdAt: -1 }).limit(1);
+    // const recentOtp = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
 
-    if (recentOtp.length == 0) {
+    console.log(otp," yo1 ",recentOtp);
+    if (recentOtp.length === 0) {
       // OTP not found
-      res.status(401).json({
-        sucess: false,
+      return res.status(401).json({
+        success: false,
         message: "OTP not Found",
       });
     } 
-    if (Number(otp) !== recentOtp.otp) {
+
+    if (Number(otp) !== recentOtp[0].otp) {
+      // console.log(otp,recentOtp," yo ",recentOtp[0].otp,typeof(recentOtp[0].otp));
       // match otp
-      console.log(typeof(otp)," ",typeof(recentOtp.otp));
       return res.status(401).json({
-        sucess: false,
+        success: false,
         message: "OTP not Match",
       });
     }
@@ -154,15 +161,15 @@ exports.signUp = async (req, res) => {
     });
 
     console.log("signup")
-    res.status(200).json({
-      sucess: true,
-      message: "SignUp Sucessful",
+    return res.status(200).json({
+      success: true,
+      message: "SignUp successful",
       user,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({
-      sucess: false,
+    return res.status(500).json({
+      success: false,
       message: "something went wrong in signup try later",
       error,
     });
@@ -179,8 +186,8 @@ exports.login = async (req, res) => {
 
     // validate data
     if (!email || !password) {
-      res.status(401).json({
-        sucess: false,
+      return res.status(401).json({
+        success: false,
         message: "please fill all detail",
       });
     }
@@ -191,7 +198,7 @@ exports.login = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        sucess: false,
+        success: false,
         message: "User not found",
       });
     }
@@ -218,22 +225,22 @@ exports.login = async (req, res) => {
         httpOnly: true,
       };
       res.cookie("token", token, options).status(200).json({
-        sucess: true,
+        success: true,
         token,
         user,
-        message: "Login sucessful",
+        message: "Login successful",
       });
     }
     else{
-        res.status(401).json({
-            sucess: false,
+        return res.status(401).json({
+            success: false,
             message: "Incorrect password",
         });
     }
 
   } catch (error) {
-    res.status(500).json({
-        sucess: false,
+    return res.status(500).json({
+        success: false,
         message: "something went wrong while login",
         error,
     });
@@ -249,15 +256,15 @@ exports.changePassword = async(req,res)=>{
         
         // validation
         if(!email || !oldPassword || !newPassword || !confirmNewPassword){
-            res.status(401).json({
-                sucess: false,
+            return res.status(401).json({
+                success: false,
                 message: "please fill all details",
             });
         }
         // match confirm password
         if(newPassword !== confirmNewPassword){
-            res.status(401).json({
-                sucess: false,
+            return res.status(401).json({
+                success: false,
                 message: "new password and confirm password not match",
             });
         }
@@ -267,8 +274,8 @@ exports.changePassword = async(req,res)=>{
         const savePassword = user.password;
         
         if(! await bcrypt.compare(oldPassword,savePassword)){
-            res.status(402).json({
-                sucess: false,
+            return res.status(402).json({
+                success: false,
                 message: "Old password is Incorrect",
             });
         }
@@ -279,20 +286,20 @@ exports.changePassword = async(req,res)=>{
         // update password and save 
         const updatedUser = await User.findByIdAndUpdate(user._id,{password:newHashPassword},{new:true});
 
-        // send mail password change sucessful
-        const mailResponse = await mailSender(email,"Password change sucessful","Your password has been change sucessfully");
+        // send mail password change successful
+        const mailResponse = await mailSender(email,"Password change successful","Your password has been change successfully");
 
-        res.status(200).json({
-            sucess: true,
-            message: "Password change sucessfully",
+        return res.status(200).json({
+            success: true,
+            message: "Password change successfully",
             // updatedUser,
             updatedUser,
             mailResponse,
         });
 
     } catch (error) {
-        res.status(500).json({
-            sucess: false,
+        return res.status(500).json({
+            success: false,
             message: "something went wrong while changing password",
             error,
         });

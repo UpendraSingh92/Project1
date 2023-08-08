@@ -16,7 +16,7 @@ exports.auth = async(req,res,next)=>{
         // if token missing
         if(!token){
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Token is missing",
             });
         }
@@ -27,7 +27,7 @@ exports.auth = async(req,res,next)=>{
             req.user = decodedToken;
         } catch (error) {
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "Token not valid",
                 error,
             });
@@ -36,7 +36,7 @@ exports.auth = async(req,res,next)=>{
         next();
     } catch (error) {
         return res.status(500).json({
-            sucess: false,
+            success: false,
             message: "something went wrong while verify token",
             error,
         });
@@ -50,7 +50,7 @@ exports.isStudent = async(req,res,next)=>{
 
         if(req.user.accountType !== "Student"){
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "This is student protected route",
             });
         }
@@ -59,7 +59,7 @@ exports.isStudent = async(req,res,next)=>{
 
     } catch (error) {
         return res.status(500).json({
-            sucess: false,
+            success: false,
             message: "user role is not be verified",
             error:error.message,
         });
@@ -72,7 +72,7 @@ exports.isInstructor = async(req,res,next)=>{
 
         if(req.user.accountType !== "Instructor"){
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "This is Instructor protected route",
             });
         }
@@ -81,7 +81,7 @@ exports.isInstructor = async(req,res,next)=>{
 
     } catch (error) {
         return res.status(500).json({
-            sucess: false,
+            success: false,
             message: "user role is not be verified",
             error:error.message,
         });
@@ -94,7 +94,7 @@ exports.isAdmin = async(req,res,next)=>{
 
         if(req.user.accountType !== "Admin"){
             return res.status(401).json({
-                sucess: false,
+                success: false,
                 message: "This is Admin protected route",
             });
         }
@@ -103,7 +103,7 @@ exports.isAdmin = async(req,res,next)=>{
 
     } catch (error) {
         res.status(500).json({
-            sucess: false,
+            success: false,
             message: "user role is not be verified",
             error:error.message,
         });

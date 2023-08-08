@@ -1,6 +1,6 @@
 import React from "react";
-import studylogo from "../../../assets/Logo/Logo-Full-Light.png";
-import { FooterLink2 } from "../../../data/footer-links";
+import studylogo from "../../assets/Logo/Logo-Full-Light.png";
+import { FooterLink2 } from "../../data/footer-links";
 
 export const Fotter = () => {
   return (

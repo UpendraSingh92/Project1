@@ -3,7 +3,7 @@ import React from 'react'
 import loginImg from '../assets/Images/login.webp'
 import Templete from "../components/core/LoginAndSignup/Templete"
 
-export default function Login({setIsLogin}) {
+export default function Login() {
   return (
     <div>
      <Templete
@@ -12,7 +12,6 @@ export default function Login({setIsLogin}) {
       desc2="Education to future-proof your career."
       image={loginImg}
       formtype="login"
-      setIsLogin={setIsLogin}
      />
     </div>
   )

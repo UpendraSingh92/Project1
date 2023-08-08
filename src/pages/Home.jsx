@@ -9,7 +9,7 @@ import instructor from "../assets/Images/Instructor.png";
 import { CodeBlock } from "../components/core/HomePage/CodeBlock";
 import { TimeLineSection } from "../components/core/HomePage/TimeLineSection";
 import { LanguageSection } from "../components/core/HomePage/LanguageSection";
-import { Fotter } from "../components/core/HomePage/Fotter";
+import { Fotter } from "../components/common/Fotter";
 import { ExploreMore } from "../components/core/HomePage/ExploreMore";
 
 const Home = () => {
