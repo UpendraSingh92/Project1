@@ -13,18 +13,18 @@ export const LanguageSection = () => {
         <HighlightText texts={" learning any language "}></HighlightText>
       </h2>
 
-      <p className="text-lg font-medium text-richblack-700 w-[55%] text-center mx-auto">
+      <p className="text-lg font-medium text-richblack-700 md:w-[55%] text-center mx-auto">
         Using spin making learning multiple languages easy. with 20+ languages
         realistic voice-over, progress tracking, custom schedule and more.
       </p>
 
       {/* images section */}
-      <div className="flex items-center justify-center">
-        <img src={image1} alt="cards" className="" />
+      <div className="flex lg:flex-row flex-col items-center justify-center">
+        <img src={image1} alt="cards" className="w-fit" />
 
-        <img src={image2} alt="cards" className="ml-[-10%] mr-[-10%]" />
+        <img src={image2} alt="cards" className="w-fit mt-[-20%] mb-[-25%] lg:ml-[-10%] lg:mr-[-10%]" />
 
-        <img src={image3} alt="cards" className="" />
+        <img src={image3} alt="cards" className="w-fit" />
       </div>
 
       <HomeButton

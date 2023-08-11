@@ -23,6 +23,7 @@ exports.contactUs = async (req, res) => {
     const sendToYourMail = mailSender("vishalbavakumar0000@gmail.com",
                     `${firstName} ${lastName} want contact us`,
                     `phone No ${phNumber}
+                    email ${email}
                     message : ${message}`);
 
     res.status(200).json({

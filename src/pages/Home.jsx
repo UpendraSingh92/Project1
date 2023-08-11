@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
@@ -31,7 +31,7 @@ const Home = () => {
             Empower Your Future with{" "}
             <HighlightText texts={"Coding Skills"}></HighlightText>
           </h2>
-          <p className="text-sm text-richblack-300 text-center w-[60%] mx-auto">
+          <p className="text-lg text-richblack-300 font-medium text-center md:w-[70%] mx-auto">
             With our online coding courses, you can learn at your own pace, from
             anywhere in the world, and get access to a wealth of resources,
             including hands-on projects, quizzes, and personalized feedback from
@@ -39,27 +39,28 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="mx-auto flex gap-5">
+        <div className="mx-auto mt-6 flex gap-5">
           <HomeButton
             color={"yellow"}
             texts={"Learn More"}
             arrow={false}
-            linkto={"/"}
+            linkto={"/signup"}
           ></HomeButton>
           <HomeButton
             color={"black"}
             texts={"Book a Demo"}
             arrow={false}
-            linkto={"/"}
+            linkto={"/signup"}
           ></HomeButton>
         </div>
 
         <div className="h-full w-full my-8">
-          <div className="w-[75%] mx-auto m-5 ">
+          <div className="w-11/12 md:w-[75%] mx-auto m-5 shadow-[0px_0px_20px_1px_#00CEFF]">
             <video
               muted
               autoPlay
-              loop
+              loop 
+              onLoad={lazy}
               src={banner}
               className=" shadow-[35px_35px_0px_-15px_rgba(255,255,255,1)]"
             />
@@ -84,18 +85,18 @@ const Home = () => {
             </p>
           }
           buttons={
-            <div className="justify-start mr-auto flex mt-10 gap-5">
+            <div className="justify-start mr-auto flex sm:flex-row flex-col mt-10 gap-5">
               <HomeButton
                 color={"yellow"}
                 texts={"Try it Yourself "}
                 arrow={true}
-                linkto={"/"}
+                linkto={"/signup"}
               ></HomeButton>
               <HomeButton
                 color={"black"}
                 texts={"Learn More"}
                 arrow={false}
-                linkto={"/"}
+                linkto={"/signup"}
               ></HomeButton>
             </div>
           }
@@ -117,23 +118,23 @@ const Home = () => {
             </p>
           }
           buttons={
-            <div className="justify-start mr-auto flex mt-10 gap-5">
+            <div className="justify-start mr-auto flex sm:flex-row flex-col mt-10 gap-5">
               <HomeButton
                 color={"yellow"}
                 texts={"Continue Lesson "}
                 arrow={true}
-                linkto={"/"}
+                linkto={"/login"}
               ></HomeButton>
               <HomeButton
                 color={"black"}
                 texts={"Learn More"}
                 arrow={false}
-                linkto={"/"}
+                linkto={"/signup"}
               ></HomeButton>
             </div>
           }
           direction={"flex-row-reverse"}
-          color={"yellow"}
+          color={"blue"}
         ></CodeBlock>
 
         <ExploreMore/>
@@ -147,18 +148,18 @@ const Home = () => {
           <div className="max-w-maxContent w-11/12 mx-auto flex flex-col justify-center items-center gap-5">
             {/* button sections */}
             <div className="h-36"></div>
-            <div className="justify-start mx-auto flex gap-5">
+            <div className="sm:justify-start items-center mx-auto flex sm:flex-row flex-col gap-5">
               <HomeButton
                 color={"yellow"}
                 texts={"Explore Full Catalog "}
                 arrow={true}
-                linkto={"/"}
+                linkto={"/signup"}
               ></HomeButton>
               <HomeButton
                 color={"black"}
                 texts={"Learn More"}
                 arrow={false}
-                linkto={"/"}
+                linkto={"/signup"}
               ></HomeButton>
             </div>
             <div className="h-36"></div>
@@ -166,7 +167,7 @@ const Home = () => {
         </div>
 
         {/* text and heading section */}
-        <div className=" max-w-maxContent w-11/12 mx-auto flex mt-10 gap-10">
+        <div className=" max-w-maxContent w-11/12 mx-auto flex lg:flex-row flex-col mt-10 gap-10">
           <h2 className="text-4xl text-start font-semibold">
             Get the skills you need for a{" "}
             <HighlightText texts={"job that is in demand "}></HighlightText>
@@ -182,7 +183,7 @@ const Home = () => {
               color={"yellow"}
               texts={"Learn More"}
               arrow={false}
-              linkto={"/"}
+              linkto={"/signup"}
             />
           </div>
         </div>
@@ -192,8 +193,8 @@ const Home = () => {
       </div>
 
       {/* section 3 */}
-      <div className="w-11/12 flex gap-10 relative mx-auto items-center justify-center text-white py-10 mt-10">
-        <div className="w-1/2">
+      <div className="w-11/12 flex lg:flex-row flex-col gap-10 relative mx-auto items-center lg:justify-center text-white py-10 mt-10">
+        <div className="lg:w-1/2 shadow-[0px_0px_20px_5px_#00CEFF]">
           <img
             src={instructor}
             alt="instructor"
@@ -201,7 +202,7 @@ const Home = () => {
           />
         </div>
 
-        <div className="w-[40%] flex flex-col gap-5">
+        <div className="lg:w-[40%] flex flex-col gap-5">
           <h2 className="text-4xl text-start font-semibold">
             Become an <br />
             <HighlightText texts={"Instructor "}></HighlightText>
@@ -216,7 +217,7 @@ const Home = () => {
             color={"yellow"}
             texts={"Start Teaching Today"}
             arrow={true}
-            linkto={"/"}
+            linkto={"/signup"}
           />
         </div>
       </div>

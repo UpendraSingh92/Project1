@@ -43,7 +43,7 @@ export const ExploreMore = () => {
       </p>
 
       {/* tab tag bar */}
-      <div className="mx-auto w-max flex gap-5 bg-richblack-600 rounded-full items-center py-2 my-10 px-3">
+      <div className="mx-auto w-max hidden md:flex gap-5 bg-richblack-600 rounded-full items-center py-2 my-10 px-3">
         {tabName.map((tabname, index) => {
           return (
             <button
@@ -62,12 +62,12 @@ export const ExploreMore = () => {
       </div>
 
       {/* cards section */}
-      <div className="flex gap-10 mx-auto mt-20 -mb-20 font-inter justify-center">
+      <div className="flex md:flex-wrap md:flex-row flex-col gap-10 mx-auto mt-20 -mb-20 font-inter md:justify-center items-center">
         {allCard.map((card, index) => {
           return (
             <div key={index}
               onClick={ () => changeCard(index+1)}
-              className={`w-[23%] justify-between flex transition-all duration-[400ms] text-black flex-col gap-12 ${currentCard === index + 1 ? "bg-white shadow-[20px_20px_0px_0px_rgba(255,214,10,1)]" : "bg-richblack-800" }`}
+              className={`w-[300px] justify-between flex transition-all duration-[400ms] text-black flex-col gap-12 ${currentCard === index + 1 ? "bg-white shadow-[20px_20px_0px_0px_rgba(255,214,10,1)]" : "bg-richblack-800" }`}
             >
               <div className="flex flex-col p-5 gap-5">
                 <h2 className= {`${index+1 === currentCard ? "text-richblack-800" : "text-richblack-25"} font-semibold text-lg `}> {card.heading}</h2>

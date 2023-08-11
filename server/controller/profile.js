@@ -152,7 +152,7 @@ exports.getEnrolledCourses = async (req, res) => {
       if (!userDetails) {
         return res.status(404).json({
           success: false,
-          message: `Could not find user with id: ${userDetails}`,
+          message: `Could not find user with id: ${userId}`,
         })
       }
       return res.status(200).json({

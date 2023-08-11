@@ -16,12 +16,12 @@ export const ProfileDropDown = () => {
 
   // custom hook which trigger on change of ref
   useOnClickOutside(ref, () => setOpenDropDown(false))
-  console.log(ref,openDropDown);
+  // console.log(ref,openDropDown);
   if (!user) return null
 
   return (
     <button className='relative' onClick={() => setOpenDropDown(true)}>
-      <div >
+      <div className='flex gap-1 items-center'>
       <img
           src={user?.image}
           alt={`profile-${user?.firstName}`}
@@ -36,7 +36,7 @@ export const ProfileDropDown = () => {
           className="absolute top-[118%] right-0 z-[1000] divide-y-[1px] divide-richblack-700 overflow-hidden rounded-md border-[1px] border-richblack-700 bg-richblack-800"
           ref={ref}
         >
-          <Link to="/" onClick={() => setOpenDropDown(false)}>
+          <Link to="/dashboard/my-profile" onClick={() => setOpenDropDown(false)}>
             <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
               <VscDashboard className="text-lg" />
               Dashboard

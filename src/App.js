@@ -1,25 +1,55 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Signup from "./pages/SignUp"
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/SignUp";
 import { Navbar } from "./components/common/Navbar";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { OpenRoute } from "./components/core/Auth/OpenRoute";
 import { UpdatePassword } from "./pages/UpdatePassword";
 import { VerifyEmail } from "./pages/VerifyEmail";
+import { About } from "./pages/About";
+import { Dashboard } from "./pages/Dashboard";
+import { PrivateRoute } from "./components/core/Auth/PrivateRoute";
+import { MyProfile } from "./components/core/Dashboard/MyProfile";
+import { ContactUs } from "./pages/ContactUs";
 
 function App() {
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
-      <Navbar/>
+      <div className="border-b-[1px] border-richblack-600 mb-10"><Navbar /></div>
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/login" element={<OpenRoute><Login/></OpenRoute> }></Route>
-        <Route path="/signup" element={<OpenRoute><Signup/></OpenRoute>}></Route>
-        <Route path="/forgotpassword" element={<ForgotPassword/>}></Route>
-        <Route path="/updatepassword/:id" element={<UpdatePassword/>}></Route>
-        <Route path="/verify-email" element={<VerifyEmail/>}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route
+          path="/login"
+          element={
+            <OpenRoute>
+              <Login />
+            </OpenRoute>
+          }
+        ></Route>
+        <Route
+          path="/signup"
+          element={
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
+          }
+        ></Route>
+        <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
+        <Route path="/updatepassword/:id" element={<UpdatePassword />}></Route>
+        <Route path="/verify-email" element={<VerifyEmail />}></Route>
+        <Route path="/aboutus" element={<About />}></Route>
+        <Route path="/contactus" element={<ContactUs />}></Route>
+        <Route
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          <Route path="/dashboard/my-profile" element={<MyProfile />}></Route>
+        </Route>
       </Routes>
     </div>
   );

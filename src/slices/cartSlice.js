@@ -70,9 +70,6 @@ const cartSlice = createSlice({
         localStorage.removeItem("cart");
         localStorage.removeItem("totalItems");
         localStorage.removeItem("totalPrice");
-
-        toast.success("cart reset sucessfully");
-
     }
   },
 });

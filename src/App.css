@@ -1,10 +1,27 @@
 /* write your css here */
-html,body{
-    overflow-x: hidden;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html,
+body {
+  overflow-x: hidden;
 }
 
-.homepage-bg{
-    background-image: url("./assets/Images/bghome.svg");
-    width: 100%;
-    /* background-repeat: no-repeat; */
+.homepage-bg {
+  background-image: url("./assets/Images/bghome.svg");
+  width: 100%;
+  /* background-repeat: no-repeat; */
+}
+
+.label-style {
+  @apply text-[14px] text-richblack-5;
+}
+.form-style {
+  @apply rounded-lg bg-richblack-700 px-3 py-2 text-[14px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none;
+}
+
+.yellow-btn {
+  @apply py-3 px-4 font-semibold flex items-center justify-center gap-4 border-pure-greys-25 border-r-[1px] border-b-[1.2px] rounded-md hover:scale-90 transition-all duration-200 cursor-pointer bg-yellow-50 text-black 
 }

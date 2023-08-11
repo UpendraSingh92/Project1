@@ -64,8 +64,7 @@ export function login(email, password, navigate) {
 
       // set user info in slice
       dispatch(setUser(response.data.user));
-      //navigate("/dashboard/my-profile");
-      navigate("/");
+      navigate("/dashboard/my-profile");
 
     } catch (error) {
       console.log("LOGIN API ERROR............", error);
