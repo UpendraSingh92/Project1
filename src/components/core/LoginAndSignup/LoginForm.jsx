@@ -24,7 +24,7 @@ export default function LoginForm() {
   }
   return (
       <div>
-        <form onSubmit={submitHandler} className="flex flex-col w-full gap-y-2 mt-6">
+        <form onSubmit={submitHandler} className="flex text-richblack-5 flex-col w-full gap-y-2 mt-6">
           <label htmlFor="email"
             className="w-full">
             Email Address <sup className='text-pink-200'>*</sup>

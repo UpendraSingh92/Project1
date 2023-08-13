@@ -43,15 +43,15 @@ export default function SignupForm() {
     
     dispatch(sendOtp(signupData.email,navigate));
 
-      // reset form
-      /*setFormData({
+      //reset form
+      setFormData({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
       });
-      */
+      
   }
   return (
     <div>
@@ -86,7 +86,7 @@ export default function SignupForm() {
 
       <form
         onSubmit={submitHandler}
-        className="flex flex-col w-full gap-y-3 mt-6"
+        className="flex flex-col text-richblack-5 w-full gap-y-3 mt-6"
       >
         <div className="flex w-full gap-x-4">
           <label className="w-full mb-1">

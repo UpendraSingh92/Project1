@@ -15,10 +15,9 @@ export const SideBarLink = ({path,iconName,linkName}) => {
     }
 
     match(path);
-    //console.log(Icon);
   return (
-    <div>
-        <NavLink to={path} className="flex items-center gap-2">
+    <div className={`text-lg py-1 pl-8 ${match(path)? "text-yellow-100 border-l-4 bg-yellow-800" : "" }`}>
+        <NavLink to={path} className={`flex items-center gap-2`}>
             <Icon></Icon>
             <p>{linkName}</p>
         </NavLink>

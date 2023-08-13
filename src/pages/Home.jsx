@@ -193,12 +193,12 @@ const Home = () => {
       </div>
 
       {/* section 3 */}
-      <div className="w-11/12 flex lg:flex-row flex-col gap-10 relative mx-auto items-center lg:justify-center text-white py-10 mt-10">
+      <div className="w-11/12 flex lg:flex-row flex-col gap-10 relative mx-auto items-center lg:justify-center text-white py-10 p-2 mt-10">
         <div className="lg:w-1/2 shadow-[0px_0px_20px_5px_#00CEFF]">
           <img
             src={instructor}
             alt="instructor"
-            className="shadow-[-20px_-20px_0px_0px_rgba(255,255,255,1)]"
+            className="w-full shadow-[-20px_-20px_0px_0px_rgba(255,255,255,1)]"
           />
         </div>
 

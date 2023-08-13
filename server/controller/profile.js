@@ -35,10 +35,12 @@ exports.updateProfile = async (req,res)=>{
         // const newProfile = await Profile.findByIdAndUpdate(profileId,{gender,dateOfBirth, contactNumber, about });
 
         // update in profile by insert this id in user
+
+        const userdata = await User.findById(userId).populate("additionalDetail").exec();
         res.status(200).json({
             success: true,
             message: "Profile created successfully",
-            body:profileData,
+            body:userdata,
         });
 
     } catch (error) {
@@ -147,7 +149,7 @@ exports.getEnrolledCourses = async (req, res) => {
       const userDetails = await User.findOne({
         _id: userId,
       })
-        .populate("courses")
+        .populate("course")
         .exec()
       if (!userDetails) {
         return res.status(404).json({

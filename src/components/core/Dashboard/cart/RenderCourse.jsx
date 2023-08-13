@@ -8,7 +8,7 @@ import {MdDeleteSweep} from "react-icons/md";
 export const RenderCourse = () => {
     const {cart} = useSelector( (state)=> state.cart )
   return (
-    <div>
+    <div className='text-richblack-5'>
         {
             cart.map( (item,index)=> (
                 <div>

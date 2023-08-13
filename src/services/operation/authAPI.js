@@ -49,7 +49,7 @@ export function login(email, password, navigate) {
         email,
         password,
       });
-      console.log("SENDOTP API RESPONSE............", response);
+      console.log("LOGIN API RESPONSE............", response);
       console.log(response.data.success);
 
       if (!response.data.success) {

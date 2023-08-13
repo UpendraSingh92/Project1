@@ -110,7 +110,7 @@ export const Navbar = () => {
           <div className="hidden md:flex gap-4 items-center">
             <div className="text-richblack-25">
               {/* user is login */}
-              <Link to={"/dashboard/my-profile"}>
+              <Link to={"/dashboard/cart"}>
                 <BsCartCheck className="text-2xl"></BsCartCheck>
                 {totalItems > 0 && <span>{totalItems}</span>}
               </Link>
@@ -145,7 +145,7 @@ export const Navbar = () => {
           <div className="flex gap-4 items-center">
             <div className="text-richblack-25">
               {/* user is login */}
-              <Link to={"/dashboard/my-profile"}>
+              <Link to={"/dashboard/cart"}>
                 <BsCartCheck className="text-2xl"></BsCartCheck>
                 {totalItems > 0 && <span>{totalItems}</span>}
               </Link>

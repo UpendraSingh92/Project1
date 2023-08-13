@@ -4,7 +4,8 @@ const otpGenerator = require("otp-generator");
 const bcrypt = require("bcrypt");
 const Profile = require("../model/Profile");
 const jwt = require("jsonwebtoken");
-const {mailSender} = require("../utils/mailSender")
+const mailSender = require("../utils/mailSender")
+const passwordUpdate = require("../mail/templates/passwordUpdate")
 require("dotenv").config();
 
 // otp Send for signUp
@@ -211,7 +212,7 @@ exports.login = async (req, res) => {
         accountType: user.accountType,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-        expiresIn: "2h",
+        expiresIn: "10h",
       });
 
       const userResponse = user.toObject();
@@ -252,20 +253,13 @@ exports.changePassword = async(req,res)=>{
     try {
         
         // fetch data
-        const {email,oldPassword,newPassword,confirmNewPassword} = req.body;
+        const {oldPassword,newPassword,email} = req.body;
         
         // validation
-        if(!email || !oldPassword || !newPassword || !confirmNewPassword){
+        if(!email || !oldPassword || !newPassword ){
             return res.status(401).json({
                 success: false,
                 message: "please fill all details",
-            });
-        }
-        // match confirm password
-        if(newPassword !== confirmNewPassword){
-            return res.status(401).json({
-                success: false,
-                message: "new password and confirm password not match",
             });
         }
 
@@ -274,21 +268,21 @@ exports.changePassword = async(req,res)=>{
         const savePassword = user.password;
         
         if(! await bcrypt.compare(oldPassword,savePassword)){
-            return res.status(402).json({
-                success: false,
-                message: "Old password is Incorrect",
-            });
+          return res.status(402).json({
+            success: false,
+            message: "Old password is Incorrect",
+          });
         }
-
+        
         // hash newpassword
-        const newHashPassword = await bcrypt(newPassword,10);
-
+        const newHashPassword = await bcrypt.hash(newPassword,10);
+        
         // update password and save 
         const updatedUser = await User.findByIdAndUpdate(user._id,{password:newHashPassword},{new:true});
-
+        
         // send mail password change successful
-        const mailResponse = await mailSender(email,"Password change successful","Your password has been change successfully");
-
+        const mailResponse = await mailSender(email,"Password change successful",passwordUpdate(email,user.firstName));
+        
         return res.status(200).json({
             success: true,
             message: "Password change successfully",
@@ -298,6 +292,7 @@ exports.changePassword = async(req,res)=>{
         });
 
     } catch (error) {
+      console.log(error);
         return res.status(500).json({
             success: false,
             message: "something went wrong while changing password",

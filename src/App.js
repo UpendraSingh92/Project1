@@ -12,12 +12,19 @@ import { About } from "./pages/About";
 import { Dashboard } from "./pages/Dashboard";
 import { PrivateRoute } from "./components/core/Auth/PrivateRoute";
 import { MyProfile } from "./components/core/Dashboard/MyProfile";
+import { EnrolledCourse } from "./components/core/Dashboard/EnrolledCourse";
+import Settings from "./components/core/Dashboard/settings";
+import Cart from "./components/core/Dashboard/cart";
 import { ContactUs } from "./pages/ContactUs";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { user } = useSelector((state) => state.profile);
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
-      <div className="border-b-[1px] border-richblack-600 mb-10"><Navbar /></div>
+      <div className="border-b-[1px] border-richblack-600 mb-10">
+        <Navbar />
+      </div>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route
@@ -49,6 +56,23 @@ function App() {
           }
         >
           <Route path="/dashboard/my-profile" element={<MyProfile />}></Route>
+          {user && user.accountType === "Student" && (
+          <>
+              <Route
+                path="/dashboard/enrolled-courses"
+                element={<EnrolledCourse />}
+              ></Route>
+              <Route
+                path="/dashboard/cart"
+                element={<Cart />}
+              ></Route>
+              <Route
+                path="/dashboard/purchase-history"
+                element={<MyProfile />}
+              ></Route>
+            </>
+          )}
+          <Route path="/dashboard/setting" element={<Settings />}></Route>
         </Route>
       </Routes>
     </div>
