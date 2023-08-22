@@ -11,7 +11,7 @@ export const ConfirmModal = ({ modalData }) => {
           {modalData?.text2}
         </p>
         <div className="flex items-center gap-x-4">
-          <button className="yellow-btn" onclick={modalData?.handler1}>{modalData?.btn1}</button>
+          <button className="yellow-btn" onClick={modalData?.handler1}>{modalData?.btn1}</button>
           <button
             className="cursor-pointer rounded-md bg-richblack-200 py-3 px-5 font-semibold text-richblack-900"
             onClick={modalData?.handler2}

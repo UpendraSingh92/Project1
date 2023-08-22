@@ -19,7 +19,7 @@ body {
   @apply text-[14px] text-richblack-5;
 }
 .form-style {
-  @apply rounded-lg bg-richblack-700 px-3 py-2 text-[14px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none;
+  @apply rounded-lg bg-richblack-700 px-3 py-2 text-[14px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-100 focus:outline-none;
 }
 
 .yellow-btn {

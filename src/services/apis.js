@@ -27,7 +27,7 @@ export const courseEndpoints = {
     // get course details
     GET_ALL_COURSE_API: BASE_URL + "/course/getAllCourses",
     COURSE_DETAILS_API: BASE_URL + "/course/getCourseDetails",
-    COURSE_CATEGORIES_API: BASE_URL + "/course/showAllCategories",
+    COURSE_CATEGORIES_API: BASE_URL + "/course/showAllCategory",
     
     // create courses
     CREATE_COURSE_API: BASE_URL + "/course/createCourse",

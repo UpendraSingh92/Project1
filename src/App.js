@@ -14,6 +14,7 @@ import { PrivateRoute } from "./components/core/Auth/PrivateRoute";
 import { MyProfile } from "./components/core/Dashboard/MyProfile";
 import { EnrolledCourse } from "./components/core/Dashboard/EnrolledCourse";
 import Settings from "./components/core/Dashboard/settings";
+import AddCourse from "./components/core/Dashboard/AddCourse";
 import Cart from "./components/core/Dashboard/cart";
 import { ContactUs } from "./pages/ContactUs";
 import { useSelector } from "react-redux";
@@ -48,14 +49,9 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />}></Route>
         <Route path="/aboutus" element={<About />}></Route>
         <Route path="/contactus" element={<ContactUs />}></Route>
-        <Route
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        >
+        <Route element={<PrivateRoute><Dashboard /></PrivateRoute>}>
           <Route path="/dashboard/my-profile" element={<MyProfile />}></Route>
+
           {user && user.accountType === "Student" && (
           <>
               <Route
@@ -72,6 +68,14 @@ function App() {
               ></Route>
             </>
           )}
+
+          {user && user.accountType === "Instructor" && (
+          <Route
+            path="/dashboard/add-course"
+            element={<AddCourse />}
+          ></Route>
+      )
+          }
           <Route path="/dashboard/setting" element={<Settings />}></Route>
         </Route>
       </Routes>

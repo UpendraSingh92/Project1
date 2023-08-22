@@ -7,17 +7,15 @@ import { Link, matchPath } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ProfileDropDown } from "../core/Auth/ProfileDropDown";
-import { apiConnector } from "../../services/apiConnector";
+import  {apiConnector}  from "../../services/apiConnector";
 import { categories } from "../../services/apis";
 
 export const Navbar = () => {
   // fetch slices
-
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const { totalItems } = useSelector((state) => state.cart);
   const [openHam,setOpenHam] = useState(false);
-
   const [catalogLink, setCatalogLink] = useState([]);
 
   const location = useLocation();
@@ -30,11 +28,16 @@ export const Navbar = () => {
      setOpenHam(false);
   },[location.pathname])
 
+  useEffect( () => {
+    fetchSublink();
+  },[]);
+
   const fetchSublink = async () => {
+    
     try {
       const result = await apiConnector("GET", categories.CATEGORIES_API);
-      console.log(result);
-      setCatalogLink(result.data);
+      //console.log(result);
+      setCatalogLink(result.data.category);
     } catch (error) {
       console.log(error);
     }
@@ -73,14 +76,14 @@ export const Navbar = () => {
           <div className="invisible absolute left-[50%] translate-x-[-50%] translate-y-[35%] top-[50%] flex flex-col gap-1 rounded-md bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-max sm:w-[200px] lg:w-[300px] z-10">
             <div className="absolute left-[50%] top-0 translate-y-[-45%] translate-x-[80%] h-6 w-6 rotate-45 rounded bg-richblack-5"></div>
 
-            {sublink.map((val, index) => {
+            {catalogLink.length > 0 && catalogLink.map((val, index) => {
               return (
                 <Link
-                  to={val.link}
+                  to={`/catalog/${val.name}`}
                   className="text-black font-normal text-lg px-3 py-2 rounded-lg hover:bg-richblack-50 cursor-pointer"
                   key={index}
                 >
-                  {val.title}
+                  {val.name}
                 </Link>
               );
             })}
