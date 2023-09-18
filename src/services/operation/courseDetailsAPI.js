@@ -141,7 +141,7 @@ export const createSection = async (data, token) => {
       throw new Error("Could Not Create Section")
     }
     toast.success("Course Section Created")
-    result = response?.data?.updatedCourse
+    result = response?.data?.body;
   } catch (error) {
     console.log("CREATE SECTION API ERROR............", error)
     toast.error(error.message)
@@ -229,7 +229,7 @@ export const deleteSection = async (data, token) => {
       throw new Error("Could Not Delete Section")
     }
     toast.success("Course Section Deleted")
-    result = response?.data?.data
+    result = response?.data?.course;
   } catch (error) {
     console.log("DELETE SECTION API ERROR............", error)
     toast.error(error.message)
@@ -277,6 +277,7 @@ export const fetchInstructorCourses = async (token) => {
       throw new Error("Could Not Fetch Instructor Courses")
     }
     result = response?.data?.data
+    console.log(result);
   } catch (error) {
     console.log("INSTRUCTOR COURSES API ERROR............", error)
     toast.error(error.message)

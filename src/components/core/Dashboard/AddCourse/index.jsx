@@ -5,11 +5,11 @@ export default function AddCourse() {
 
   return (
     <div className='text-white flex gap-5 justify-between'>
-        <div className='w-[59%]'>
+        <div className='md:w-[59%] w-full'>
         <h1 className='text-white mb-10 text-3xl font-medium'>Add Course</h1>
             <RenderStep/>
         </div>
-        <div className="sticky top-10 hidden max-w-[400px] h-max flex-1 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 xl:block">
+        <div className="sticky top-10 hidden max-w-[400px] h-max flex-1 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 md:block">
           <p className="mb-8 text-lg text-richblack-5">⚡ Course Upload Tips</p>
           <ul className="ml-5 list-item list-disc space-y-4 text-xs text-richblack-5">
             <li>Set the Course Price option or make it free.</li>

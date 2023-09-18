@@ -88,7 +88,7 @@ export default function SignupForm() {
         onSubmit={submitHandler}
         className="flex flex-col text-richblack-5 w-full gap-y-3 mt-6"
       >
-        <div className="flex w-full gap-x-4">
+        <div className="flex flex-col sm:flex-row w-full gap-y-2 gap-x-4">
           <label className="w-full mb-1">
             <p>
               First Name<sup className="text-pink-200">*</sup>
@@ -138,7 +138,7 @@ export default function SignupForm() {
           ></input>
         </label>
 
-        <div className="flex w-full gap-x-4">
+        <div className="flex flex-col gap-y-2 sm:flex-row w-full gap-x-4">
           <label className="w-full relative  mb-1">
             <p>
               Create Password<sup className="text-pink-200">*</sup>

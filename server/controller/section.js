@@ -54,10 +54,10 @@ exports.updateSection = async(req,res)=>{
     try {
 
         // fetch data
-        const {sectionName,sectionID} = req.body;
+        const {sectionName,sectionId,courseId} = req.body;
 
         // validate data
-        if(!sectionName || !sectionID) {
+        if(!sectionName || !sectionId) {
             return res.status(401).json({
                 success: false,
                 message: "Please fill all details in section",
@@ -65,12 +65,19 @@ exports.updateSection = async(req,res)=>{
         }
 
         // update section name
-        const updatedSection = await Section.findByIdAndUpdate(sectionID,
+        const updatedSection = await Section.findByIdAndUpdate(sectionId,
                                     {sectionName:sectionName},{new:true});
+        
+        const courseNew = await Course.findOne({_id:courseId}).populate({
+            path: "courseContent",
+            populate:{
+                path:"subSections",
+            }
+        }).exec();
 
         res.status(200).json({
             success: true,
-            body:updatedSection,
+            data:courseNew,
             message: "Section created successfully",
         });
 
@@ -105,12 +112,18 @@ exports.deleteSection = async(req,res)=>{
                                         $pull:{
                                             courseContent:sectionID,
                                         }
-                                    },{new:true});
+                                    },{new:true}).populate({
+                                        path: "courseContent",
+                                        populate:{
+                                            path:"subSections",
+                                        }
+                                    }).exec();
 
         // remove section
         await Section.findByIdAndDelete(sectionID);
         res.status(200).json({
             success: true,
+            course:updatedCourse,
             message: "Section deleted successfully",
         });
 

@@ -36,18 +36,18 @@ export const UpdatePassword = () => {
   }
 
   return (
-    <div>
+    <div className="flex justify-center items-center px-4">
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div className="text-white">
-          <h2>Choose New Password</h2>
-          <p>Almost done. Enter your new password and youre all set.</p>
+        <div className="text-white w-[450px] flex flex-col gap-4 mx-auto mt-20">
+          <h2 className="text-3xl font-bold">Choose New Password</h2>
+          <p className="text-richblack-50 text-[18px]">Almost done. Enter your new password and youre all set.</p>
 
-          <label htmlFor="password " className="relative w-full">
+          <label htmlFor="password " className="relative w-full -mb-3">
             Password <sup className="text-pink-200">*</sup>
             <span
-              className="absolute text-white top-[46px] left-[calc(92%)] text-2xl"
+              className="absolute text-white top-[42px] left-[calc(92%)] text-2xl"
               onClick={() => setShowPassword((prev) => !prev)}
             >
               {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
@@ -65,9 +65,9 @@ export const UpdatePassword = () => {
             className="bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b border-richblack-200"
           />
 
-        <label htmlFor="confirmPassword " className="relative w-full"> Confirm Password <sup className="text-pink-200">*</sup>
+        <label htmlFor="confirmPassword " className="relative w-full -mb-3"> Confirm Password <sup className="text-pink-200">*</sup>
             <span
-              className="absolute text-white top-[46px] left-[calc(92%)] text-2xl"
+              className="absolute text-white top-[42px] left-[calc(92%)] text-2xl"
               onClick={() => setShowPassword2((prev) => !prev)}
             >
               {showPassword2 ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
@@ -85,7 +85,7 @@ export const UpdatePassword = () => {
             className="bg-richblack-800 rounded-[0.5rem] text-richblack-5 w-full p-[12px] border-b border-richblack-200"
           />
 
-          <button className="w-max" onClick={submitHandler}>
+          <button className="w-full mt-1" onClick={submitHandler}>
             <HomeButton color={"yellow"} texts={"Reset Password"}></HomeButton>
           </button>
         </div>

@@ -79,7 +79,7 @@ export const Navbar = () => {
             {catalogLink.length > 0 && catalogLink.map((val, index) => {
               return (
                 <Link
-                  to={`/catalog/${val.name}`}
+                  to={`/catalog/${val.name.split(" ").join("-").toLowerCase()}`}
                   className="text-black font-normal text-lg px-3 py-2 rounded-lg hover:bg-richblack-50 cursor-pointer"
                   key={index}
                 >

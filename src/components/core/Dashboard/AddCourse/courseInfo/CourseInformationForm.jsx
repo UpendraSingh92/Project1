@@ -36,19 +36,21 @@ export const CourseInformationForm = () => {
 
   const isFormUpdated = () => {
     const currentValues = getValues();
+    console.log("curr values",currentValues.courseRequirements);
+    console.log("course ",course.instructions);
+
     if (
       currentValues.courseTitle !== course.courseName ||
-      currentValues.courseShortDesc !== course.courseDescription ||
+      currentValues.courseShortDesc !== course.description ||
       currentValues.coursePrice !== course.price ||
       currentValues.courseTitle !== course.courseName ||
-      //currentValues.courseTags.toString() !== course.tag.toString() ||
+      currentValues.courseTags.toString() !== course.tag.toString() ||
       currentValues.courseBenefits !== course.whatYouWillLearn ||
       currentValues.courseCategory._id !== course.category._id ||
-      //currentValues.courseImage !== course.thumbnail ||
+      currentValues.courseImage !== course.thumbnail ||
       currentValues.courseRequirements.toString() !==
-        course.instructions.toString()
-    )
-      return true;
+      course.instructions.toString()
+    ) return true;
     else return false;
   };
 
@@ -64,7 +66,7 @@ export const CourseInformationForm = () => {
         }
 
         if (currentValues.courseShortDesc !== course.courseDescription) {
-          formData.append("courseDescription", data.courseShortDesc);
+          formData.append("description", data.courseShortDesc);
         }
 
         if (currentValues.coursePrice !== course.price) {
@@ -96,11 +98,11 @@ export const CourseInformationForm = () => {
           setStep(2);
           dispatch(setCourse(result));
         }
-      } else {
+        console.log("PRINTING result", result);
+      } 
+      else {
         toast.error("NO Changes made so far");
       }
-      console.log("PRINTING FORMDATA", formData);
-      console.log("PRINTING result", result);
 
       return;
     }
@@ -108,13 +110,13 @@ export const CourseInformationForm = () => {
     // to create course not to update
     const formData = new FormData();
     formData.append("courseName", data.courseTitle);
-    formData.append("courseDescription", data.courseShortDesc);
+    formData.append("description", data.courseShortDesc);
     formData.append("price", data.coursePrice);
     formData.append("whatYouWillLearn", data.courseBenefits);
-    formData.append("category", data.courseCategory);
-    formData.append("tags", data.courseTags);
-    formData.append("thumbnail", data.thumbnail);
+    formData.append("tag", data.courseTags);
     formData.append("instructions", JSON.stringify(data.courseRequirements));
+    formData.append("category", data.courseCategory);
+    formData.append("thumbnail", data.thumbnail);
     formData.append("status", "Draft");
 
     for (const pair of formData.entries()) {
@@ -122,16 +124,13 @@ export const CourseInformationForm = () => {
     }
     
     setLoading(true);
-    console.log("BEFORE add course API call");
-    console.log("PRINTING FORMDATA", formData);
-    const result = 1; //= await addCourseDetails(formData, token);
+    
+    const result = await addCourseDetails(formData, token);
     if (result) {
       dispatch(setStep(2));
-      console.log("hii",step);
       dispatch(setCourse(result));
     }
     setLoading(false);
-    console.log("PRINTING FORMDATA", formData);
     console.log("PRINTING result", result);
   };
 
@@ -140,7 +139,7 @@ export const CourseInformationForm = () => {
 
     if (editCourse) {
       setValue("courseTitle", course.courseName);
-      setValue("courseShortDesc", course.courseDescription);
+      setValue("courseShortDesc", course.description);
       setValue("coursePrice", course.price);
       setValue("courseTags", course.tag);
       setValue("courseBenefits", course.whatYouWillLearn);
@@ -267,9 +266,9 @@ export const CourseInformationForm = () => {
           getValues={getValues}
         />
 
-        <div>
+        <div className="flex gap-2 items-center justify-end">
           {editCourse && (
-            <button onClick={() => dispatch(setStep(2))}>
+            <button className="black-btn" onClick={() => dispatch(setStep(2))}>
               continue without saving
             </button>
           )}

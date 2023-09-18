@@ -25,6 +25,8 @@ export const TagInput = ({
         // Add the tag to the array and clear the input
         const newtags = [...tags, tagValue];
         setTags(newtags);
+        console.log(tags);
+        console.log(event.target.value);
         event.target.value = "";
       }
     }
@@ -39,7 +41,9 @@ export const TagInput = ({
   useEffect(() => {
     if (editCourse) {
       // console.log(course)
-      setTags(course?.tag);
+      let temp = course.tag[0].split(",");
+      setTags(temp);
+      console.log(temp);
     }
     register(name, { required: true, validate: (value) => value.length > 0 });
   }, []);
@@ -57,10 +61,11 @@ export const TagInput = ({
 
       <div>
         {/* show tags */}
-        {tags.map((tag, index) => (
+        <div className="flex gap-2">
+          {tags.map((tag, index) => (
           <div
             key={index}
-            className="m-1 flex items-center rounded-full bg-yellow-200 px-2 py-1 text-sm text-richblack-5"
+            className="m-1 flex items-center rounded-full w-max bg-yellow-200 px-2 py-1 text-sm text-richblack-5"
           >
             {tag}
             <button
@@ -69,18 +74,17 @@ export const TagInput = ({
               onClick={() => handleRemovetag(index)}
             >
               <MdClose className="text-sm" />
-            </button>
-
-            
+            </button> 
           </div>
         ))}
+        </div>
         <input
               id={name}
               name={name}
               type="text"
               placeholder={placeholder}
               onKeyDown={handleKeyDown}
-              className="form-style w-full"
+              className="form-style w-full mt-2"
             />
       </div>
       {errors[name] && (

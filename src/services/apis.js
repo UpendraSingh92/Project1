@@ -35,7 +35,7 @@ export const courseEndpoints = {
     CREATE_SUBSECTION_API: BASE_URL + "/course/addSubSection",
     
     // update courses
-    EDIT_COURSE_API: BASE_URL + "/course/editCourse",
+    EDIT_COURSE_API: BASE_URL + "/course/edit-Course",
     UPDATE_SECTION_API: BASE_URL + "/course/updateSection",
     UPDATE_SUBSECTION_API: BASE_URL + "/course/updateSubSection",
 
@@ -67,7 +67,7 @@ export const categories = {
 
 // CATALOG PAGE DATA
 export const catalogData = {
-    CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",
+    CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetail",
 }
 
 // SETTINGS PAGE API

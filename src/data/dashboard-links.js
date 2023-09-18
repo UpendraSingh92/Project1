@@ -23,7 +23,7 @@ export const sidebarLinks = [
   {
     id: 4,
     name: "My Courses",
-    path: "/dashboard/my-courses",
+    path: "/dashboard/my-course",
     type: "Instructor",
     icon: "VscVm",
   },
@@ -37,7 +37,7 @@ export const sidebarLinks = [
   {
     id: 6,
     name: "Enrolled Courses",
-    path: "/dashboard/enrolled-courses",
+    path: "/dashboard/enrolled-course",
     type: "Student",
     icon: "VscMortarBoard",
   },

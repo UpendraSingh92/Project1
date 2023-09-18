@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 //Course controllers
-const { createCourse, showAllCourse, courseDetail } = require("../controller/course");
+const { createCourse, showAllCourse, courseDetail, editCourse,deleteCourse,getFullCourseDetails,getInstructorCourses } = require("../controller/course");
 
 // sectiom controller
 const{createSection,deleteSection,updateSection} =  require("../controller/section");
@@ -50,7 +50,16 @@ router.get("/showAllCourses", showAllCourse)
 
 // Get Details for a Specific Courses
 router.post("/getCourseDetails", courseDetail)
+router.post("/getFullCourseDetails", getFullCourseDetails)
 
+// Edit Course routes
+router.post("/edit-Course", auth, isInstructor, editCourse)
+
+// Get all Courses Under a Specific Instructor
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
+
+// Delete a Course
+router.delete("/deleteCourse", deleteCourse)
 
 // *******************************************************************************
 //                                      Category routes (Only by Admin)
@@ -60,7 +69,6 @@ router.post("/getCourseDetails", courseDetail)
 router.post("/createCategory", auth, isAdmin, createCategory)
 router.get("/showAllCategory", showAllCategory)
 router.post("/getCategoryPageDetail", categoryPageDetail)
-
 
 // *******************************************************************************
 //                                      Rating and Review

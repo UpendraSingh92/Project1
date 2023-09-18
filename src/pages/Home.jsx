@@ -213,12 +213,14 @@ const Home = () => {
             StudyNotion. We provide the tools and skills to teach what you love.
           </p>
 
+          <div className="w-max">
           <HomeButton
             color={"yellow"}
             texts={"Start Teaching Today"}
             arrow={true}
             linkto={"/signup"}
           />
+          </div>
         </div>
       </div>
 

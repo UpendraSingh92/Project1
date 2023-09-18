@@ -121,6 +121,7 @@ export function resetPassword(password,confirmPassword,token,navigate){
       }
 
       toast.success("Password Reset Successful");
+      navigate("/login");
       
     } catch (error) {
       console.log("RESET PASSWORD API ERROR............", error);

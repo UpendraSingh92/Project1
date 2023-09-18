@@ -43,7 +43,7 @@ export default function LoginForm() {
           <label htmlFor="password " className="relative w-full">
             Password <sup className='text-pink-200'>*</sup>
 
-            <span className="absolute text-white top-[46px] left-[calc(92%)] text-2xl"
+            <span className="absolute text-white top-[46px] left-[calc(85%)] md:left-[calc(92%)] text-2xl"
             onClick={() => setShowPassword( (prev) => !prev)}>
               {showPassword? (<AiOutlineEyeInvisible/>) : (<AiOutlineEye/>)}
             </span>

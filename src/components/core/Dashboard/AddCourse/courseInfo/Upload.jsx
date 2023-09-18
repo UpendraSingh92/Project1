@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { FiUploadCloud } from "react-icons/fi";
 import { useState } from "react";
 import { useRef } from "react";
+import { Player } from "video-react";
 
 export const Upload = ({
   name,
@@ -10,10 +11,12 @@ export const Upload = ({
   register,
   setValue,
   errors,
-  editData,
+  editData = null,
+  video = false,
+  viewData = null
 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [preview, setPreview] = useState(editData ? editData : "");
+  const [preview, setPreview] = useState(viewData ? viewData : editData ? editData : "");
   const inputRef = useRef(null);
 
   const onDrop = (inputfile) => {
@@ -25,7 +28,9 @@ export const Upload = ({
   };
 
   const { isDragActive, getInputProps, getRootProps } = useDropzone({
-    accept: { "image/*": [".jpeg", ".jpg", ".png"] },onDrop
+    accept: !video ?
+    { "image/*": [".jpeg", ".jpg", ".png"] } :
+    {"video/*": [".mp4"]},onDrop
   });
 
   const previewFile = (file) => {
@@ -46,28 +51,35 @@ export const Upload = ({
   return (
     <div>
       <label htmlFor={name} className="label-style">
-        {label} <sup className="text-pink-200 ">*</sup>
+        {label} {viewData && <sup className="text-pink-200 ">*</sup>}
       </label>
       <div className={`${
           isDragActive ? "bg-richblack-600" : "bg-richblack-700"
         } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}>
         {preview ? (
           <div className="flex w-full flex-col items-center p-6">
-            <img
+            {
+              !video ? (
+                <img
               src={preview}
               alt="Preview"
               className="h-full w-full rounded-md object-cover"
-            />
-            <button
-              type="button"
-              onClick={() => {
-                setPreview("");
-                setSelectedFile(null);
-                setValue(name, null);
-              }}
-            >
-              Cancel
-            </button>
+            />) : (
+              <Player aspectRatio="16:9" playsInline src={preview} />
+            )}
+            {!viewData && (
+              <button
+                type="button"
+                onClick={() => {
+                  setPreview("")
+                  setSelectedFile(null)
+                  setValue(name, null)
+                }}
+                className="mt-3 text-richblack-400 underline"
+              >
+                Cancel
+              </button>
+            )}
           </div>
         ) : (
           <div {...getRootProps()} 

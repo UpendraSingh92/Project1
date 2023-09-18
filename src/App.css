@@ -19,9 +19,25 @@ body {
   @apply text-[14px] text-richblack-5;
 }
 .form-style {
-  @apply rounded-lg bg-richblack-700 px-3 py-2 text-[14px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-100 focus:outline-none;
+  @apply rounded-lg bg-richblack-700 px-3 py-2 text-[14px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-100 focus:outline-none
 }
 
 .yellow-btn {
   @apply py-3 px-5 font-semibold flex items-center justify-center gap-4 border-pure-greys-25 border-r-[1px] border-b-[1.2px] rounded-md hover:scale-90 transition-all duration-200 cursor-pointer bg-yellow-50 text-black 
+}
+
+.black-btn{
+  @apply py-3 px-5 font-semibold flex items-center justify-center gap-4 border-pure-greys-25 border-r-[1px] border-b-[1.2px] rounded-md hover:scale-90 transition-all duration-200 cursor-pointer bg-pure-greys-100 text-black 
+}
+
+.table-r{
+  @apply flex gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-2
+}
+
+.table-h{
+  @apply flex-1 text-left text-sm font-medium uppercase text-richblack-100
+}
+
+.table-d{
+  @apply text-sm font-medium text-richblack-100
 }

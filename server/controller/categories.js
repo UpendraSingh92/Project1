@@ -83,13 +83,20 @@ exports.categoryPageDetail = async(req,res)=>{
     const diffCategoryCourse = await Category.find({_id: {$ne : categoryId},}).populate("course").exec();
 
     // top selling course
+    const allCategory = await Category.find().populate({
+      path:"course",
+      match: {status:"published"}
+    })
 
+    const allCourse = allCategory.flatMap( (course)=> course.courses);
+    const mostSell = allCourse.sort( (a,b)=> b.sold - a.sold).sclice(0,10);
 
     res.status(200).json({
       success: true,
       data:{
         categoryCourses,
         diffCategoryCourse,
+        mostSell,
       },
   });
 

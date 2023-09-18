@@ -45,6 +45,7 @@ exports.resetPasswordlink = async(req,res)=>{
             body:mail,
             message: "rest password mail send successfully",
         });
+        
     } catch (error) {
         res.status(500).json({
             success: false,

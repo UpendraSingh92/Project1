@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const RequirementField = ({
   name,
@@ -9,11 +10,12 @@ export const RequirementField = ({
 }) => {
   const [requirement, setRequirement] = useState("");
   const [reqList, setReqList] = useState([]);
+  const { course, editCourse} = useSelector((state) => state.course);
 
   const handleList = () => {
     if (requirement) {
-      setReqList([...reqList, requirement]);
-      // setRequirement("");
+      setReqList([...reqList,requirement]);
+      setRequirement("");
     }
     console.log(reqList);
   };
@@ -22,12 +24,16 @@ export const RequirementField = ({
     const lists = [...reqList];
     lists.splice(index, 1);
     setReqList(lists);
+    console.log(reqList);
   }
 
   useEffect( ()=> {
-   register(name,{
-    required:true,
-   }) 
+   register(name,{});
+   if(editCourse){
+    console.log(course.instructions);
+    // setReqList(course?.instructions);
+    setReqList(course.instructions);
+   }
   },[])
 
   useEffect( () => {
@@ -56,11 +62,11 @@ export const RequirementField = ({
 
       <div>
         {
-          (reqList.length > 0) && (
+          (reqList && reqList.length > 0) && (
             reqList.map( (requ,index) => {
-              return (<div key={index}>
+              return (<div key={index} className='flex items-center gap-4 text-richblack-5'>
                 <span>{requ} </span>
-                <button type="button" onClick={()=> handleRemove(index)}> clear</button>
+                <button type="button" onClick={()=> handleRemove(index)} className="'text-xs text-pure-greys-300 py-[2px] px-[8px] rounded-md box-border grid place-content-center'"> clear</button>
               </div>) 
             })
           )

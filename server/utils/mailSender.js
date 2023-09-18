@@ -16,7 +16,6 @@ const mailSender = async(email,title,body)=>{
             to: email,
             subject: title,
             html:body,
-            // html:<p>Your OTP is</p>
         });
 
         // console.log(info);
