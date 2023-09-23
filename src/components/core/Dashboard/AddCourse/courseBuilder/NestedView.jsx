@@ -36,10 +36,11 @@ export const NestedView = ({handleChangeEdit}) => {
     setconformModal(null);
 
   }
-  const handleDeleteSubSection = async(sectionId,subsectionId)=> {
+  const handleDeleteSubSection = async(subSectionId,sectionId)=> {
+    
     const result = await deleteSubSection({
         sectionId,
-        subsectionId,
+        subSectionId,
         token
     })
 
@@ -87,7 +88,7 @@ export const NestedView = ({handleChangeEdit}) => {
                         <div className='p-2 px-4 flex flex-col gap-2 text-richblack-50'>{
                                 section.subSections.map( (data) => (
                                     <div key={data._id}
-                                        onClick={()=> setViewSubSection(data)}
+                                        onClick={()=> {setViewSubSection(data); console.log(data)}}
                                         className='flex justify-between text-xl items-center border-b-2 border-richblack-500 p-2'>
                                         <div className='flex items-center gap-2'>
                                             <RxDropdownMenu/>
@@ -96,7 +97,7 @@ export const NestedView = ({handleChangeEdit}) => {
                                         <div className='flex gap-3 items-center'
                                             onClick={ (e)=> e.stopPropagation()}>
                                             <button 
-                                                onClick={()=> {editSubSection({...data,sectionID:section._id})}}>
+                                                onClick={()=> {setEditSubSection({...data,sectionId:section._id})}}>
                                                 <MdEdit/>
                                             </button>
                                             <button
@@ -105,7 +106,7 @@ export const NestedView = ({handleChangeEdit}) => {
                                                 text2: "All the lectures in this Subsection wil be deleted",
                                                 btn1: "Delete",
                                                 btn2: "Cancel",
-                                                handler1: () => handleDeleteSubSection(data._id.section._id),
+                                                handler1: () => handleDeleteSubSection(data._id,section._id),
                                                 handler2: () => setconformModal(null),
                                             })}}
                                             > <RiDeleteBin6Line/> </button>

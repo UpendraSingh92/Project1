@@ -22,9 +22,8 @@ exports.createSubSection = async (req,res)=>{
         }
 
         // upload video file
-        // const response = await cloudinaryFileUpload(video,process.env.FOLDER_NAME);
-        let response = {secure_url:"dummy"}
-
+        const response = await cloudinaryFileUpload(video,process.env.FOLDER_NAME);
+        
         const timeDuration = `${response.duration}`
         // entry in DB
         const newSubSection = await SubSection.create(
@@ -61,7 +60,8 @@ exports.updateSubSection = async (req,res)=>{
     try {
         
         // fetch data
-        const {title, description, subSectionId} = req.body;
+        const {title, description, subSectionId, sectionId} = req.body;
+        console.log(sectionId,subSectionId);
 
         // fetch video file
         const subSec = await SubSection.findById(subSectionId);
@@ -94,7 +94,7 @@ exports.updateSubSection = async (req,res)=>{
 
         await subSec.save();
 
-        const updatedSection = await Section.findById(sectionId).populate("subsections");
+        const updatedSection = await Section.findById(sectionId).populate("subSections");
         
         res.status(200).json({
             success: true,
@@ -105,14 +105,14 @@ exports.updateSubSection = async (req,res)=>{
         res.status(500).json({
             success: false,
             message: "something went wrong while Updating Sub-Section",
-            error,
+            error:error.message,
         });
     }
 }
 
 exports.deleteSubSection = async (req, res) => {
     try {
-      const { subSectionId, sectionId } = req.body
+      const { sectionId, subSectionId } = req.body
       await Section.findByIdAndUpdate(
         { _id: sectionId },
         {
@@ -129,7 +129,7 @@ exports.deleteSubSection = async (req, res) => {
           .json({ success: false, message: "SubSection not found" })
       }
       
-      const updatedSection = await Section.findById(sectionId).populate("subsections");
+      const updatedSection = await Section.findById(sectionId).populate("subSections");
 
       return res.json({
         success: true,
@@ -141,6 +141,7 @@ exports.deleteSubSection = async (req, res) => {
       return res.status(500).json({
         success: false,
         message: "An error occurred while deleting the SubSection",
+        error: error.message,
       })
     }
   }

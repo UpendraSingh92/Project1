@@ -29,7 +29,8 @@ export const SubsectionModal = ({
 
   useEffect(() => {
     if (view || edit) {
-      setValue("LectureTitle", modalData.title);
+      console.log(modalData);
+      setValue("lectureTitle", modalData.title);
       setValue("lectureDesc", modalData.description);
       setValue("lectureVideo", modalData.videoUrl);
     }
@@ -65,7 +66,7 @@ export const SubsectionModal = ({
     }
 
     if (currentValues.lectureVideo !== modalData.videoUrl) {
-      formData.append("video", currentValues.lectureVideo);
+      formData.append("videoFile", currentValues.lectureVideo);
     }
 
     setLoading(true);
@@ -97,7 +98,7 @@ export const SubsectionModal = ({
     formData.append("sectionId", modalData);
     formData.append("title", data.lectureTitle);
     formData.append("description", data.lectureDesc);
-    formData.append("video", data.lectureVideo);
+    formData.append("videoFile", data.lectureVideo);
     setLoading(true);
     //API CALL
     const result = await createSubSection(formData, token);
@@ -130,12 +131,13 @@ export const SubsectionModal = ({
             setValue={setValue}
             errors={errors}
             video={true}
-            vewData={view ? modalData.videoUrl : null}
+            viewData={view ? modalData.videoUrl : null}
             editData={edit ? modalData.videoUrl : null}
           />
           <div>
               <label className="label-style">Lecture Title {!view && <sup className="text-pink-200">*</sup>}</label>
               <input 
+              disabled={view || loading}
               id='lectureTitle'
               placeholder='Enter Lecture Title'
               {...register("lectureTitle", {required:true})}
@@ -146,6 +148,7 @@ export const SubsectionModal = ({
           <div>
               <label className="label-style">Lecture Description {!view && <sup className="text-pink-200">*</sup>}</label>
               <textarea 
+              disabled={view || loading}
               id='lectureDesc'
               placeholder='Enter Lecture Description'
               {...register("lectureDesc", {required:true})}

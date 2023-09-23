@@ -4,6 +4,7 @@ import { FiUploadCloud } from "react-icons/fi";
 import { useState } from "react";
 import { useRef } from "react";
 import { Player } from "video-react";
+import "../../../../../../node_modules/video-react/dist/video-react.css"
 
 export const Upload = ({
   name,
@@ -65,7 +66,7 @@ export const Upload = ({
               alt="Preview"
               className="h-full w-full rounded-md object-cover"
             />) : (
-              <Player aspectRatio="16:9" playsInline src={preview} />
+              <Player aspectRatio="16:9" playsInline={false} src={preview} />
             )}
             {!viewData && (
               <button
@@ -83,7 +84,7 @@ export const Upload = ({
           </div>
         ) : (
           <div {...getRootProps()} 
-            className="flex w-full flex-col items-center p-6">
+            className="flex flex-col items-center p-6">
             <input {...getInputProps()} ref={inputRef} />
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
