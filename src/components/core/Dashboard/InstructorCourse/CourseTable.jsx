@@ -30,7 +30,7 @@ export const CourseTable = ({ courses, setCourses }) => {
     const result = await fetchInstructorCourses(token);
     if (result) {
       setCourses(result);
-      console.log(result);
+      // console.log(result);
     }
     setConfirmationModal(null);
     setLoading(false);
@@ -41,8 +41,8 @@ export const CourseTable = ({ courses, setCourses }) => {
         <Thead>
           <Tr className="table-r">
             <Th className="table-h">Courses</Th>
-            <Th className="table-h">Duration</Th>
-            <Th className="table-h">Prices</Th>
+            <Th className="table-h ml-40">Duration</Th>
+            <Th className="table-h ml-12">Prices</Th>
             <Th className="table-h">Actions</Th>
           </Tr>
         </Thead>
@@ -58,16 +58,16 @@ export const CourseTable = ({ courses, setCourses }) => {
             courses.map((course) => (
               <Tr
                 key={course._id}
-                className="flex gap-x-10 border-b border-richblack-800 px-6 py-8"
+                className="flex justify-between pr-20 border-b border-richblack-800 py-8"
               >
-                <Td className="flex flex-1 gap-x-4">
+                <Td className="flex">
                   <img
                     src={course?.thumbnail}
                     alt={course?.courseName}
                     className="h-[148px] w-[220px] rounded-lg object-cover"
                   />
 
-                  <div className="flex flex-col justify-between">
+                  <span className="flex flex-col justify-between">
                     <p className="text-lg font-semibold text-richblack-5">
                       {course.courseName}
                     </p>
@@ -95,10 +95,10 @@ export const CourseTable = ({ courses, setCourses }) => {
                         </span>
                         Published
                       </p>)}
-                  </div>
+                  </span>
                 </Td>
-                <Td className="table-d">2hr 30min</Td>
-                <Td className="table-d">₹{course.price}</Td>
+                <Td className="table-d mr-40 -ml-10">2hr 30min</Td>
+                <Td className="table-d -ml-28">₹{course.price}</Td>
 
                 <Td className="table-d">
                   <button

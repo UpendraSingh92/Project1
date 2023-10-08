@@ -30,7 +30,7 @@ export const RequirementField = ({
   useEffect( ()=> {
    register(name,{});
    if(editCourse){
-    console.log(course.instructions);
+    // console.log(course.instructions);
     // setReqList(course?.instructions);
     setReqList(course.instructions);
    }

@@ -20,8 +20,7 @@ export const EnrolledCourse = () => {
     fetchCourse();
   }, []);
 
-  return (
-    <div className="-mt-5">
+  return (<div className="-mt-5 text-white">
       <h1 className="mb-14 text-3xl font-medium text-richblack-5">
         Enrolled Courses
       </h1>
@@ -43,6 +42,7 @@ export const EnrolledCourse = () => {
                 {enrolledCourse.map((course) => (
                   <div key={course._id}>
                     <div>
+                      {console.log(course.courseName)}
                       <img src={course.thumbnail} />
                       <p>{course.courseName}</p>
                       <p>{course.description}</p>

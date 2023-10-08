@@ -25,8 +25,8 @@ export const TagInput = ({
         // Add the tag to the array and clear the input
         const newtags = [...tags, tagValue];
         setTags(newtags);
-        console.log(tags);
-        console.log(event.target.value);
+        // console.log(tags);
+        // console.log(event.target.value);
         event.target.value = "";
       }
     }
@@ -43,7 +43,7 @@ export const TagInput = ({
       // console.log(course)
       let temp = course.tag[0].split(",");
       setTags(temp);
-      console.log(temp);
+      // console.log(temp);
     }
     register(name, { required: true, validate: (value) => value.length > 0 });
   }, []);

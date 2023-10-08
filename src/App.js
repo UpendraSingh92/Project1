@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import { MyCourses } from "./components/core/Dashboard/MyCourses";
 import { Catalog } from "./pages/Catalog";
 import { EditCourse } from "./components/core/Dashboard/Editcourse";
+import { CoursePage } from "./pages/CoursePage";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -68,6 +69,10 @@ function App() {
               <Route
                 path="/dashboard/purchase-history"
                 element={<MyProfile />}
+              ></Route>
+              <Route
+                path="/courses/:courseId"
+                element={<CoursePage/>}
               ></Route>
             </>
           )}

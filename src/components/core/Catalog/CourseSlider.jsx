@@ -35,7 +35,7 @@ export const CourseSlider = ({courses}) => {
                     }
                 </Swiper>
             ): (
-                <p>No Course Found</p>
+                <p className=' text-2xl text-center text-richblack-25 my-6'>No Course Found</p>
             )
         }
     </div>

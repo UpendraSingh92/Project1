@@ -13,8 +13,9 @@ export async function getCategoryPage (categoryId) {
     if (!response.data.success) {
         throw new Error(response.data.message);
     }
-
     result = response.data;
+    toast.dismiss(toastId);
+    return result;
 
   } catch (error) {
     console.log("CATEGORY PAGE API ERROR............", error);

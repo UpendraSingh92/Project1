@@ -52,8 +52,8 @@ exports.createCourse = async(req,res)=>{
         }
         
         // instructions
-        let tempInstructions = JSON.parse(instructions);
-        console.log(tempInstructions);
+        let tempInstructions = await JSON.parse(instructions);
+        //console.log(tempInstructions);
         
         // upload thumbnail
         const thumbnailImg = await cloudinaryFileUpload(thumbnail,process.env.FOLDER_NAME,);
@@ -73,7 +73,7 @@ exports.createCourse = async(req,res)=>{
         }); 
 
         // add course in instructor schema--> what course instructor is created
-        const updatedUser = User.findByIdAndUpdate(req.user.id,
+        const updatedUser = await User.findByIdAndUpdate(req.user.id,
             {
                 $push:{
                     course:newCourse._id,
@@ -81,13 +81,14 @@ exports.createCourse = async(req,res)=>{
                 },{new:true});
 
         // add course in instructor schema--> what course instructor is created
-        const updatedCategory = Category.findByIdAndUpdate(category,
+        const updatedCategory = await Category.findByIdAndUpdate({_id:category},
             {
                 $push:{
                     course:newCourse._id
                 }
             },{new:true});
 
+        console.log("category -------",category,newCourse._id,updatedCategory);
             return res.status(200).json({
                 success: true,
                 message: "course created successfully",

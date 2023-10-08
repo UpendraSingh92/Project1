@@ -88,15 +88,16 @@ exports.categoryPageDetail = async(req,res)=>{
       match: {status:"published"}
     })
 
+    //console.log(allCategory);
     const allCourse = allCategory.flatMap( (course)=> course.courses);
-    const mostSell = allCourse.sort( (a,b)=> b.sold - a.sold).sclice(0,10);
+    // const mostSell = allCourse.sort( (a,b)=> b.sold - a.sold).sclice(0,10);
 
     res.status(200).json({
       success: true,
       data:{
         categoryCourses,
         diffCategoryCourse,
-        mostSell,
+        // mostSell,
       },
   });
 
@@ -104,7 +105,7 @@ exports.categoryPageDetail = async(req,res)=>{
     res.status(500).json({
           success: false,
           message: "Internal server error in fetching particular category course",
-          error,
+          error: error.message,
       });
   }
 }
