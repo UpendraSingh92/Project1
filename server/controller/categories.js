@@ -69,7 +69,11 @@ exports.categoryPageDetail = async(req,res)=>{
     const {categoryId} = req.body;
     
     // fetch courses
-    const categoryCourses = await Category.findById(categoryId).populate("course").exec();
+    const categoryCourses = await Category.findById(categoryId).populate({
+      path: "course",
+      populate : {
+        path : "ratingAndReview",
+      }}).exec();
 
     // validate
     if(!categoryCourses){

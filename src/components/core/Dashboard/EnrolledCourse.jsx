@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { getUserEnrolledCourses } from "../../../services/operation/profileAPI";
+import { useNavigate } from "react-router-dom";
 
 export const EnrolledCourse = () => {
   const { token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   const [enrolledCourse, setEnrolledCourse] = useState(null);
 
   const fetchCourse = async () => {
@@ -33,28 +35,35 @@ export const EnrolledCourse = () => {
             <div className="text-lg text-center text-richblack-5">You Have Not Enrolled In Any Course Yet</div>
           ) : (
             <div>
-              <div>
-                <p>Course Name</p>
-                <p>Durations</p>
-                <p>Progress</p>
+              <div className="flex rounded-t-lg bg-richblack-500 text-richblack-5">
+                <p className="w-[45%] px-5 py-3">Course Name</p>
+                <p className="flex-1 px-2 py-3">Durations</p>
+                <p className="flex-1 px-2 py-3">Progress</p>
               </div>
               <div>
-                {enrolledCourse.map((course) => (
-                  <div key={course._id}>
-                    <div>
-                      {console.log(course.courseName)}
-                      <img src={course.thumbnail} />
-                      <p>{course.courseName}</p>
-                      <p>{course.description}</p>
+                {enrolledCourse.map((course, indx) => (
+                  <div key={course._id} className={`flex items-center border border-richblack-700 ${indx === enrolledCourse.length - 1 ? "rounded-b-lg" : "rounded-none"}`}>
+                    <div className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3" onClick={()=> navigate(`/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSections?.[0]?._id}`)}>
+                      <img src={course.thumbnail} alt="course_img" className="h-14 w-14 rounded-lg object-cover"/>
+                      <div className="flex max-w-xs flex-col gap-2">
+                        <p className="font-semibold">{course.courseName}</p>
+                        <p className="text-xs text-richblack-300">
+                        {course.description.length > 50
+                      ? `${course.description.slice(0, 50)}...`
+                      : course.description}</p>
+                      </div>
                     </div>
-                    <p>{course.duration}</p>
-                    <p>Progress : {course.progress}%</p>
-                    <ProgressBar
-                      completed={course.progress}
-                      maxCompleted={100}
-                      height="8px"
-                      isLabelVisible={false}
-                    />
+                    <p className="flex-1">{course.duration || "1Hr"}</p>
+                    <div className="flex flex-1 w-1/5 flex-col gap-2 px-2 py-3 ">
+
+                      <p>Progress : {course.progress || 0}%</p>
+                      <ProgressBar
+                        completed={course.progress || 0}
+                        maxCompleted={100}
+                        height="8px"
+                        isLabelVisible={false}
+                      />
+                    </div>
                   </div>
                 ))}
               </div>

@@ -1,0 +1,23 @@
+.sidebar-main{
+    /* border-width: 2px; */
+    border: 2px solid #2C333F;
+    background-color: #161D29;
+
+    min-width: 250px;
+}
+
+
+
+@media (max-width: 950px) {
+    .sidebar-main{
+        position: fixed;
+        top: 55px;
+        left: -100%;
+        transition: all 0.5s linear;
+        z-index: 1000;
+    }
+
+    .sidebar-main.active{
+        left: 0;
+    }
+}

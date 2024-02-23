@@ -196,8 +196,9 @@ exports.courseDetail = async(req,res)=>{
 exports.editCourse = async (req, res) => {
     try {
       const { courseId } = req.body;
-      const updates = req.body
-      const course = await Course.findById(courseId)
+      const updates = req.body;
+      console.log(courseId, req.body);
+      const course = await Course.findById(courseId);
   
       if (!course) {
         return res.status(404).json({ error: "Course not found" })
@@ -277,7 +278,7 @@ exports.getFullCourseDetails = async (req, res) => {
           },
         })
         .populate("category")
-        //.populate("ratingAndReviews")
+        .populate("ratingAndReview")
         .populate({
           path: "courseContent",
           populate: {
@@ -385,7 +386,7 @@ exports.getFullCourseDetails = async (req, res) => {
         // Delete sub-sections of the section
         const section = await Section.findById(sectionId)
         if (section) {
-          const subSections = section.subSection
+          const subSections = section.subSections
           for (const subSectionId of subSections) {
             await SubSection.findByIdAndDelete(subSectionId)
           }

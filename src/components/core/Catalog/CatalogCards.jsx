@@ -10,7 +10,8 @@ export const CatalogCards = ({course}) => {
     const [avgReviewCount, setAvgReviewCount] = useState(0);
 
     useEffect( ()=> {
-        const count = GetAvgRating(course.ratingAndReviews);
+        console.log(course);
+        const count = GetAvgRating(course.ratingAndReview);
         setAvgReviewCount(count);
     },[course]);
 
@@ -30,10 +31,10 @@ export const CatalogCards = ({course}) => {
                     <p className="text-sm text-richblack-50">
                       {course?.instructor?.firstName} {course?.instructor?.lastName}
                      </p>
-                    <div className='flex items-center gap-x-3'>
+                    <div className='flex items-center w-full gap-x-3'>
                         <span className="text-yellow-5">{avgReviewCount || 0}</span>
                         <RatingStars Review_Count={avgReviewCount} />
-                        <span className="text-richblack-400">{course?.ratingAndReviews?.length} Ratings</span>
+                        <div className="text-richblack-400 gap-1 flex">{course.ratingAndReview?.length}<span>Ratings</span></div>
                     </div>
                     <p className="text-xl text-richblack-5">Rs. {course?.price}</p>
                 </div>

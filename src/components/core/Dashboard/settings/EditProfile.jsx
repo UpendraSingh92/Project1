@@ -125,7 +125,7 @@ export default function EditProfile() {
               </select>
               {errors.gender && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your Date of Birth.
+                  Please enter your Gender.
                 </span>
               )}
             </div>
@@ -145,7 +145,7 @@ export default function EditProfile() {
                 {...register("contactNumber", {
                   required: {
                     value: true,
-                    message: "Please enter your Contact Number.",
+                    message: "Please valid Contact Number.",
                   },
                   maxLength: { value: 12, message: "Invalid Contact Number" },
                   minLength: { value: 10, message: "Invalid Contact Number" },

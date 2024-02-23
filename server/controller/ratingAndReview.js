@@ -13,45 +13,37 @@ exports.createRating = async(req,res)=>{
 
         // validate data
         if(!rating || !review || !courseId || !userId) {
-            res.status(401).json({
+            return res.status(401).json({
                 success: false,
                 message: "Please fill all details in rating",
             });
         }
 
         // check user is enrolled in course or not
-        const course = await Course.findOne({courseId,
-                                           studentEnrolled: {
-                                            $selectMatch: {$eq :userId}
-                                           }} );
+        const course = await Course.findOne({_id : courseId,
+                                           studentEnrolled : {
+                                            $elemMatch: {$eq : userId}
+                                           },} );
 
-        if(course){
-            res.status(401).json({
+        if(!course){
+            return res.status(401).json({
                 success: false,
                 message: "student is not enrolled in course",
             });
         }
-        /*
-        if(!course.studentEnrolled.includes(userId)){
-            res.status(401).json({
-                success: false,
-                message: "student is not enrolled in course",
-            });
-        }
-        */
 
         // only 1 rating is allow check not try to do another
         const alreadyReviewed = await RatingAndReview.findOne({user:userId ,course:courseId});
 
         if(alreadyReviewed){
-            res.status(401).json({
+            return res.status(401).json({
                 success: false,
                 message: "You alreadey give the rating",
             });
         }
 
         // create entry in DB
-        const newRating = (await RatingAndReview.create({user:userId,course:courseId,rating,review})).populate(["user", "course"]).exec();
+        const newRating = await RatingAndReview.create({user:userId,course:courseId,rating,review});
 
         // add in course rating 
         const addRatingCourse = await Course.findByIdAndUpdate(courseId,{
@@ -59,17 +51,17 @@ exports.createRating = async(req,res)=>{
                 ratingAndReview : newRating._id,
             },
         })
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
-            body:newRating,
+            body: newRating,
             message: "Rating created successfully",
         });
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "something went wrong while Rating to course",
-            error,
+            error: error.message,
         });
     }
 }
@@ -82,7 +74,7 @@ exports.avergeRating = async(req,res)=>{
 
         // validate data
         if(!courseId ) {
-            res.status(401).json({
+            return res.status(401).json({
                 success: false,
                 message: "Please fill course details valid",
             });
@@ -123,7 +115,7 @@ exports.avergeRating = async(req,res)=>{
         let avgRating = sum/student;
         */
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             body:allRating,
             average: avgRating,
@@ -149,7 +141,7 @@ exports.getAllRating = async(req,res)=>{
 
         // validate data
         if(!courseId ) {
-            res.status(401).json({
+            return res.status(401).json({
                 success: false,
                 message: "Please fill course details valid",
             });
@@ -170,14 +162,14 @@ exports.getAllRating = async(req,res)=>{
 
         //.populate(["user", "course"]).exec();;
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             body:allRating,
             message: "Rating fetched successfully",
         });
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "something went wrong while fetching all Rating",
             error,

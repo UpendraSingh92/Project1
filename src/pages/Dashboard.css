@@ -1,0 +1,20 @@
+.dashboard-main .dashboard-toggle{
+    display: none;
+}
+
+
+
+@media (max-width: 950px) {
+    .dashboard-main .dashboard-toggle{
+        display: block;
+        position: fixed;
+        left: 0; width: 100%;
+        top: 60px;
+        transition: all 0.3s linear;
+        z-index: 900;
+    }
+
+    .dashboard-main .dashboard-toggle.active{
+        left: 250px;
+    }
+}

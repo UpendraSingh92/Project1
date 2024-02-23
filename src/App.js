@@ -9,6 +9,7 @@ import { OpenRoute } from "./components/core/Auth/OpenRoute";
 import { UpdatePassword } from "./pages/UpdatePassword";
 import { VerifyEmail } from "./pages/VerifyEmail";
 import { About } from "./pages/About";
+import { Error } from "./pages/Error";
 import { Dashboard } from "./pages/Dashboard";
 import { PrivateRoute } from "./components/core/Auth/PrivateRoute";
 import { MyProfile } from "./components/core/Dashboard/MyProfile";
@@ -22,6 +23,8 @@ import { MyCourses } from "./components/core/Dashboard/MyCourses";
 import { Catalog } from "./pages/Catalog";
 import { EditCourse } from "./components/core/Dashboard/Editcourse";
 import { CoursePage } from "./pages/CoursePage";
+import { ViewCourse } from "./pages/ViewCourse";
+import { VideoDetail } from "./components/core/ViewCourse/VideoDetail";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -53,11 +56,12 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />}></Route>
         <Route path="/aboutus" element={<About />}></Route>
         <Route path="/contactus" element={<ContactUs />}></Route>
+
+        {/* Dashboard */}
         <Route element={<PrivateRoute><Dashboard /></PrivateRoute>}>
           <Route path="/dashboard/my-profile" element={<MyProfile />}></Route>
-
           {user && user.accountType === "Student" && (
-          <>
+            <>
               <Route
                 path="/dashboard/enrolled-courses"
                 element={<EnrolledCourse />}
@@ -69,10 +73,6 @@ function App() {
               <Route
                 path="/dashboard/purchase-history"
                 element={<MyProfile />}
-              ></Route>
-              <Route
-                path="/courses/:courseId"
-                element={<CoursePage/>}
               ></Route>
             </>
           )}
@@ -91,12 +91,26 @@ function App() {
             path="/dashboard/edit-course/:courseId"
             element={<EditCourse />}
           ></Route>
-            </>
-      )
+            </>)
           }
           <Route path="/dashboard/setting" element={<Settings />}></Route>
         </Route>
+
+        {/* view course */}
+        <Route element={<PrivateRoute><ViewCourse/></PrivateRoute>}>
+          {
+            user && user.accountType === "Student" && (
+              <>
+                <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<VideoDetail/>}></Route>
+              </>
+            )
+          }
+        </Route>
+
         <Route path="/catalog/:catalogname" element={<Catalog/>}/>
+        <Route path="/courses/:courseId" element={<CoursePage/>}></Route>
+        <Route path="*" element={<Error/>} />
+        <Route path="/error" element={<Error/>} />
       </Routes>
     </div>
   );

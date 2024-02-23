@@ -37,7 +37,7 @@ exports.resetPasswordlink = async(req,res)=>{
 
         // send mail
         const mail = await mailSender(email,"password reset link",
-                        `passwor reset link : ${url}`);
+                        `password reset link : ${url}`);
         
 
         return res.status(200).json({
