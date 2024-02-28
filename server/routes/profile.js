@@ -7,11 +7,12 @@ const {
         deleteProfile,
         getUserAllDetails,
         getEnrolledCourses,
-        updateDisplayPicture
+        updateDisplayPicture,
+        instructorDashboard
         } = require("../controller/profile");
 
 // import middlewares
-const {auth} = require("../middleware/auth");
+const {auth, isInstructor} = require("../middleware/auth");
 
 // define routes
 
@@ -26,5 +27,6 @@ router.get("/getUserDetails", auth, getUserAllDetails)
 // Get Enrolled Courses
 router.get("/getEnrolledCourses", auth, getEnrolledCourses)
 router.put("/updateDisplayPicture", auth, updateDisplayPicture)
+router.get("/instructorDashboard", auth, isInstructor, instructorDashboard)
 
 module.exports = router;

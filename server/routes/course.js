@@ -19,6 +19,8 @@ const{avergeRating, createRating, getAllRating} =  require("../controller/rating
 // importing Middlewares
 const {auth ,isInstructor, isStudent, isAdmin } = require("../middleware/auth")
 
+// course Progress routes
+const {updateCourseProgress} = require("../controller/courseProgress");
 
 //********************************************************************************
 //                                      Course routes
@@ -50,7 +52,7 @@ router.get("/showAllCourses", showAllCourse)
 
 // Get Details for a Specific Courses
 router.post("/getCourseDetails", courseDetail)
-router.post("/getFullCourseDetails", getFullCourseDetails)
+router.post("/getFullCourseDetails",auth, getFullCourseDetails)
 
 // Edit Course routes
 router.post("/edit-Course", auth, isInstructor, editCourse)
@@ -78,4 +80,10 @@ router.post("/createRating", auth, isStudent, createRating)
 router.get("/getAverageRating", avergeRating)
 router.get("/getReviews", getAllRating)
 
+
+// *******************************************************************************
+//                                    course Progress
+// *******************************************************************************
+
+router.post("/updatecourseprogress",auth,isStudent,updateCourseProgress);
 module.exports = router;

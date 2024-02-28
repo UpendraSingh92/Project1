@@ -5,6 +5,7 @@ const User = require("../model/User");
 const Category = require("../model/Category");
 const {cloudinaryFileUpload} = require("../utils/fileUpload");
 const {convertSecondsToDuration} = require("../utils/secToDuration");
+const CourseProgress = require("../model/CourseProgress");
 
 // create course controller
 exports.createCourse = async(req,res)=>{
@@ -266,8 +267,8 @@ exports.editCourse = async (req, res) => {
 exports.getFullCourseDetails = async (req, res) => {
     try {
       const { courseId } = req.body
-      console.log(req.user);
-      //const userId = req.user.id
+      console.log("hiii",req.user);
+      const userId = req.user.id
       const courseDetails = await Course.findOne({
         _id: courseId,
       })
@@ -287,12 +288,12 @@ exports.getFullCourseDetails = async (req, res) => {
         })
         .exec()
   
-      let courseProgressCount = await Course.findOne({
-        courseID: courseId,
-        //userId: userId,
+      let courseProgressCount = await CourseProgress.findOne({
+        courseId: courseId,
+        userId: userId,
       })
   
-      // console.log("courseProgressCount : ", courseProgressCount,courseDetails)
+      console.log("courseProgressCount : ", courseProgressCount)
   
       if (!courseDetails) {
         return res.status(400).json({

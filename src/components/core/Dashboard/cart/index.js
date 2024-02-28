@@ -13,7 +13,7 @@ export default function Cart() {
         <div className='h-[1px] bg-richblack-200 my-[2px] mb-3'></div>
         {
             totalPrice <= 0 ? <div className='text-richblack-200 mt-10 text-3xl text-center font-medium mb-2'>Your Cart Is Empty</div> :
-            <div>
+            <div className="mt-8 flex flex-col items-start gap-x-10 gap-y-6 md:flex-row">
                 <RenderCourse/>
                 <RenderAmount/>
             </div>

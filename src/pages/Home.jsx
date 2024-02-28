@@ -10,6 +10,7 @@ import { CodeBlock } from "../components/core/HomePage/CodeBlock";
 import { TimeLineSection } from "../components/core/HomePage/TimeLineSection";
 import { LanguageSection } from "../components/core/HomePage/LanguageSection";
 import { Fotter } from "../components/common/Fotter";
+import { ReviewSlider } from "../components/common/ReviewSlider"
 import { ExploreMore } from "../components/core/HomePage/ExploreMore";
 
 const Home = () => {
@@ -225,8 +226,10 @@ const Home = () => {
       </div>
 
       {/* section 4 */}
-      <div className="w-11/12 flex gap-10 relative mx-auto items-center justify-center text-white py-10 mt-10">
-          <h2 className="text-4xl text-start font-semibold">Reviews from other learners</h2>
+      <div className="w-11/12 flex flex-col gap-10 relative mx-auto items-center justify-center text-white py-10 mt-10">
+        <h2 className="text-4xl text-start font-semibold">Reviews from other learners</h2>
+
+        <ReviewSlider/>
       </div>
 
       {/* fotter */}

@@ -9,6 +9,21 @@ export const EnrolledCourse = () => {
   const navigate = useNavigate();
   const [enrolledCourse, setEnrolledCourse] = useState(null);
 
+  const findDuration = (course) =>{
+    let totalDurationInSeconds = 0
+    course.courseContent.forEach((content) => {
+      content.subSections.forEach((subSec) => {
+        const timeDurationInSeconds = parseInt(subSec.timeDuration)
+        totalDurationInSeconds += timeDurationInSeconds
+      })
+    })
+
+    // in minutes
+    return (totalDurationInSeconds/60).toFixed(2);
+  }
+
+  const findProgress = []
+
   const fetchCourse = async () => {
     try {
       const response = await getUserEnrolledCourses(token);
@@ -53,12 +68,12 @@ export const EnrolledCourse = () => {
                       : course.description}</p>
                       </div>
                     </div>
-                    <p className="flex-1">{course.duration || "1Hr"}</p>
+                    <p className="flex-1">{findDuration(course) + " Min"}</p>
                     <div className="flex flex-1 w-1/5 flex-col gap-2 px-2 py-3 ">
 
-                      <p>Progress : {course.progress || 0}%</p>
+                      <p>Progress : {course.progressPercentage || 0}%</p>
                       <ProgressBar
-                        completed={course.progress || 0}
+                        completed={course.progressPercentage || 0}
                         maxCompleted={100}
                         height="8px"
                         isLabelVisible={false}

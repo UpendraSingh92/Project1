@@ -37,6 +37,7 @@ export async function buyCourse(token, courses, student, navigate, dispatch) {
     const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
 
     if(!res){
+      toast.dismiss(toastId);
       toast.error("razorpay faild to checkout");
       return;
     }
@@ -87,6 +88,7 @@ export async function buyCourse(token, courses, student, navigate, dispatch) {
   } catch (error) {
     console.log("payment API error ",error);
     toast.error("razorpay faild to payment");
+    toast.dismiss(toastId);
   }
   toast.dismiss(toastId);
 }

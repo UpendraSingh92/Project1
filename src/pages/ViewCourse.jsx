@@ -10,12 +10,14 @@ import { CourseReviewModal } from '../components/core/ViewCourse/CourseReviewMod
 export const ViewCourse = () => {
 
   const [reviewModal, setReviewModal] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [slider, setSlider] = useState(false);
   const {courseId} = useParams();
   const {token} = useSelector((state)=>state.auth);
   const dispatch = useDispatch();
 
   const setCourseDetail = async()=>{
+    setLoading(true);
     const courseData = await getFullDetailsOfCourse(courseId,token);
     console.log(courseData);
 
@@ -29,6 +31,7 @@ export const ViewCourse = () => {
       lecture += sec.subSections.length
     })
     dispatch(setTotalNoOfLectures(lecture));
+    setLoading(false);
   }
 
   useEffect(()=>{
@@ -37,18 +40,19 @@ export const ViewCourse = () => {
 
   return (
     <>
-        <div className='relative flex min-h-[calc(100vh-60px)] -mt-10'>
+        {loading ? <div className='h-full w-full flex items-center justify-center'>Loading</div> : 
+        <div className='relative flex min-h-[calc(100vh-60px)] w-full -mt-10'>
               <VideoDetailSidebar slider={slider} setReviewModal={setReviewModal}/>
-              <div className='relative'>
-                <div className="p-1 bg-richblack-800 cursor-pointer z-10 absolute h-fit w-fit" onClick={()=>{setSlider(!slider)}}>
+              <div className='relative w-full h-full'>
+                <button type='button' className="p-1 bg-richblack-800 left-0 cursor-pointer z-10 absolute h-fit w-fit" onClick={()=>{setSlider(!slider)}}>
                   {
                     !slider ? <AiOutlineArrowLeft size={24} fill="#fff"/> 
                     : <AiOutlineArrowRight size={24} fill="#fff"/>
                     }
-                </div>
+                </button>
                 <Outlet/>
               </div>
-            </div>
+        </div>}
         {reviewModal && <CourseReviewModal setReviewModal={setReviewModal}/>}
     </>
   )

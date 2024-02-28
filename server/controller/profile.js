@@ -1,6 +1,8 @@
 const Profile = require("../model/Profile");
 const User = require("../model/User");
+const Course = require("../model/Course");
 const { cloudinaryFileUpload } = require("../utils/fileUpload");
+const CourseProgress = require("../model/CourseProgress");
 
 // update profile because we already created when we create user and give all value are null so now we need to update
 exports.updateProfile = async (req,res)=>{
@@ -146,7 +148,7 @@ exports.updateDisplayPicture = async (req, res) => {
 exports.getEnrolledCourses = async (req, res) => {
     try {
       const userId = req.user.id
-      const userDetails = await User.findOne({
+      let userDetails = await User.findOne({
         _id: userId,
       }).populate({
         path: "course",
@@ -157,20 +159,76 @@ exports.getEnrolledCourses = async (req, res) => {
           }
         }
       }).exec()
+
       if (!userDetails) {
         return res.status(404).json({
           success: false,
           message: `Could not find user with id: ${userId}`,
         })
       }
+      
+      userDetails = userDetails.toObject();
+      for (var i = 0; i < userDetails.course.length; i++){
+        let subsecLength = 0;
+        //console.log(userDetails.course[i].courseContent);
+        subsecLength = userDetails.course[i].courseContent.reduce((acc,curr) => 
+          (acc + curr.subSections.length),0);
+
+        let progressCount = await CourseProgress.findOne({
+          courseId: userDetails.course[i]._id,
+          userId: userId,
+        });
+
+        let completed = progressCount.completedVideos.length;
+        // console.log(completed,subsecLength);
+        userDetails.course[i].progressPercentage = Math.round((completed / subsecLength) * 100 )
+      }
+
+      //console.log(userDetails.course[0]);
       return res.status(200).json({
         success: true,
         data: userDetails.course,
       })
+
     } catch (error) {
       return res.status(500).json({
         success: false,
         message: error.message,
-      })
+      });
     }
 };
+
+exports.instructorDashboard = async(req,res) => {
+  try {
+    const userId = req.user.id;
+    const courseDetail = await Course.find({instructor:userId});
+    const courseData = courseDetail.map((course) => {
+      const totalStudent = course.studentEnrolled.length;
+      const totalamount = totalStudent * course.price;
+
+      // final object with additional details
+      const courseWithStats = {
+        courseId : course._id,
+        courseName : course.courseName,
+        description : course.description,
+        totalStudent,
+        totalamount,
+      }
+
+      return courseWithStats;
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "instructor Dashboard data fetched",
+      data: courseData,
+    })
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "internal server error in instructor dashboard",
+      error: error.message,
+    })
+  }
+}

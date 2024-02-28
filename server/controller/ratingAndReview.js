@@ -137,22 +137,22 @@ exports.getAllRating = async(req,res)=>{
     try {
 
         // validate data
-        const {courseId} = req.body;
+        // const {courseId} = req.body;
 
         // validate data
-        if(!courseId ) {
-            return res.status(401).json({
-                success: false,
-                message: "Please fill course details valid",
-            });
-        }
+        // if(!courseId ) {
+            // return res.status(401).json({
+                // success: false,
+                // message: "Please fill course details valid",
+            // });
+        // }
 
         // only want specific data of user
-        const allRating = await RatingAndReview.find({course:courseId})
+        const allRating = await RatingAndReview.find({})
         .sort({rating : "desc"})
         .populate({
             path: "user",
-            select: "firstName LastName email image"
+            select: "firstName lastName email image"
         })
         .populate({
             path: "course",
@@ -164,7 +164,7 @@ exports.getAllRating = async(req,res)=>{
 
         return res.status(200).json({
             success: true,
-            body:allRating,
+            allRatings :allRating,
             message: "Rating fetched successfully",
         });
 
