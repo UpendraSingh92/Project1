@@ -66,15 +66,15 @@ export const ChangeProfilePicture = () => {
   }, [imageFile]);
 
   return (
-    <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
-        <div className="flex items-center gap-x-4">
+    <div className="flex items-center sm:justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-5 sm:p-8 px-4 sm:px-12 text-richblack-5">
+        <div className="flex flex-col sm:flex-row items-center mx-auto sm:mx-0 gap-4">
           <img
             src={previewSource || user?.image}
             alt={`profile-${user?.firstName}`}
             className="aspect-square w-[78px] rounded-full object-cover"
           />
-          <div className="space-y-2">
-            <p>Change Profile Picture</p>
+          <div className="flex flex-col gap-2">
+            <p className="text-center sm:text-start">Change Profile Picture</p>
             <div className="flex flex-row gap-3">
               <input
                 type="file"

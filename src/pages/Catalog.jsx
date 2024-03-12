@@ -24,7 +24,7 @@ export const Catalog = () => {
             setCategoryId(category_id);
         }
         categoryIdFetch();
-    },[]);
+    },[catalogname]);
     
     useEffect( ()=> {
         const fetchCategoryDetail = async()=> {

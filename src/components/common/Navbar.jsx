@@ -122,7 +122,7 @@ export const Navbar = () => {
           </div>
         )}
 
-        {token === null && (
+        {!token && (
           <div className="hidden md:flex gap-4">
             {/* user not login */}
             <Link to={"/login"}>

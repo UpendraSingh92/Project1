@@ -72,7 +72,7 @@ export const InstructorChart = ({courses}) => {
           Income
         </button>
       </div>
-      <div className="relative w-[60%] aspect-square mx-auto">
+      <div className="relative w-full sm:w-[70%] md:w-[60%] aspect-square mx-auto">
         {/* Render the Pie chart based on the selected chart */}
         <Pie
           data={currChart === "students" ? studentChartData : incomeChartData}

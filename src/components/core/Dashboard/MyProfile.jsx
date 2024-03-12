@@ -8,11 +8,14 @@ export const MyProfile = () => {
   const navigate = useNavigate();
 
   function formattedDate(date) {
-    return new Date(date).toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
+    if(date !== null){
+      return new Date(date).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      });
+    }
+    return null;
   }
 
   return (
@@ -21,13 +24,13 @@ export const MyProfile = () => {
         My Profile
       </h1>
       <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-        <div className="flex items-center gap-x-4">
+        <div className="flex flex-col sm:flex-row items-center gap-4">
           <img
             src={user?.image}
             alt={`profile-${user?.firstName}`}
             className="aspect-square w-[78px] rounded-full object-cover"
           />
-          <div className="space-y-1">
+          <div className="space-y-1 text-center sm:text-start">
             <p className="text-lg font-semibold text-richblack-5">
               {user?.firstName + " " + user?.lastName}
             </p>
@@ -59,7 +62,7 @@ export const MyProfile = () => {
         </div>
         <p
           className={`${
-            user?.additionalDetails?.about
+            user?.additionalDetail?.about
               ? "text-richblack-5"
               : "text-richblack-400"
           } text-sm font-medium`}
@@ -83,41 +86,41 @@ export const MyProfile = () => {
             <RiEditBoxLine />
           </button>
         </div>
-        <div className="flex max-w-[500px] justify-between">
-          <div className="flex flex-col gap-y-5">
-            <div>
+        <div className="flex flex-col gap-3 sm:flex-row sm:gap-0 max-w-[500px] sm:justify-between">
+          <div className="flex flex-col gap-3 sm:gap-5">
+            <div className="flex justify-between sm:flex-col sm:gap-[0px]">
               <p className="mb-2 text-sm text-richblack-400">First Name</p>
               <p className="text-sm font-medium text-richblack-5">
                 {user?.firstName}
               </p>
             </div>
-            <div>
-              <p className="mb-2 text-sm text-richblack-400">Email</p>
-              <p className="text-sm font-medium text-richblack-5">
-                {user?.email}
-              </p>
-            </div>
-            <div>
-              <p className="mb-2 text-sm text-richblack-400">Gender</p>
-              <p className="text-sm font-medium text-richblack-5">
-                {user?.additionalDetail?.gender ?? "Add Gender"}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-y-5">
-            <div>
+            <div className="flex justify-between sm:flex-col sm:gap-[0px]">
               <p className="mb-2 text-sm text-richblack-400">Last Name</p>
               <p className="text-sm font-medium text-richblack-5">
                 {user?.lastName}
               </p>
             </div>
-            <div>
-              <p className="mb-2 text-sm text-richblack-400">Phone Number</p>
+            <div className="flex justify-between sm:flex-col sm:gap-[0px]">
+              <p className="mb-2 text-sm text-richblack-400">Email</p>
               <p className="text-sm font-medium text-richblack-5">
-                {user?.additionalDetail?.contactNumber ?? "Add Contact Number"}
+                {user?.email}
+              </p>
+          </div>
+          </div>
+          <div className="flex flex-col gap-3 sm:gap-5">
+            <div className="flex justify-between sm:flex-col sm:gap-[0px]">
+              <p className="mb-2 text-sm text-richblack-400">Gender</p>
+              <p className="text-sm font-medium text-richblack-5">
+                {user?.additionalDetail?.gender ?? "Add Gender"}
               </p>
             </div>
-            <div>
+            <div className="flex justify-between sm:flex-col sm:gap-[0px]">
+              <p className="mb-2 text-sm text-richblack-400">Phone Number</p>
+              <p className="text-sm font-medium text-richblack-5">
+                {user?.additionalDetail?.contactNumber ?? "Add Number"}
+              </p>
+            </div>
+            <div className="flex justify-between sm:flex-col sm:gap-[0px]">
               <p className="mb-2 text-sm text-richblack-400">Date Of Birth</p>
               <p className="text-sm font-medium text-richblack-5">
                 {formattedDate(user?.additionalDetail?.dateOfBirth) ??

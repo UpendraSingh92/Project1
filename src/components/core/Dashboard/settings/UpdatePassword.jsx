@@ -28,7 +28,7 @@ export const UpdatePassword = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(submitPassword)}>
-        <div className="my-10 flex flex-col gap-y-6 rounded-md text-richblack-5 border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
+        <div className="my-10 flex flex-col gap-y-6 rounded-md text-richblack-5 border-[1px] border-richblack-700 bg-richblack-800 p-5 sm:p-8 px-4 sm:px-12">
           <h2 className="text-lg font-semibold">Password</h2>
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="relative flex flex-col gap-2 lg:w-[48%]">

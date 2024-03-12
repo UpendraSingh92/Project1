@@ -58,7 +58,7 @@ exports.sendOTP = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "error on sending Verifiation OTP",
-      error,
+      error: error.message,
     });
   }
 };
