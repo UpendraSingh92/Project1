@@ -120,7 +120,7 @@ export const CoursePage = () => {
                 <div className="flex flex-wrap gap-5 text-lg">
                   <p className="flex items-center gap-2">
                     {" "}
-                    <BiInfoCircle /> Created at {(response.createdAt)?.toISOString().split("T")[0]}
+                    <BiInfoCircle /> Created at {(response.createdAt).split("T")[0]}
                   </p>
                   <p className="flex items-center gap-2">
                     {" "}
