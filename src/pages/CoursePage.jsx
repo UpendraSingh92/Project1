@@ -120,7 +120,7 @@ export const CoursePage = () => {
                 <div className="flex flex-wrap gap-5 text-lg">
                   <p className="flex items-center gap-2">
                     {" "}
-                    <BiInfoCircle /> Created at {response.createdAt}
+                    <BiInfoCircle /> Created at {(response.createdAt)?.toISOString().split("T")[0]}
                   </p>
                   <p className="flex items-center gap-2">
                     {" "}
@@ -128,10 +128,22 @@ export const CoursePage = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex w-full flex-col items-center gap-3 border-y border-y-richblack-500 py-4 lg:hidden">
-                <p className="space-x-3 pb-3 text-3xl font-semibold text-richblack-5">
+              <div className="flex w-full items-center justify-evenly border-y border-y-richblack-500 py-2 sm:py-4 lg:hidden">
+                <p className="space-x-3 sm:pb-3 text-3xl font-semibold text-richblack-5">
                   Rs. {response?.price}
                 </p>
+              <button
+                className="yellow-btn lg:hidden"
+                onClick={
+                  user && response?.studentEnrolled.includes(user?._id)
+                    ? () => navigate("/dashboard/enrolled-courses")
+                    : handleBuyCourse
+                }
+              >
+                {user && response?.studentEnrolled.includes(user?._id)
+                  ? "Go To Course"
+                  : "Buy Now"}
+                </button>
               </div>
             </div>
 

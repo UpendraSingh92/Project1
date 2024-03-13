@@ -37,12 +37,12 @@ export const CourseTable = ({ courses, setCourses }) => {
   }
   return (
     <>
-      <Table className="rounded-xl border border-richblack-800">
-        <Thead>
-          <Tr className="table-r">
-            <Th className="table-h">Courses</Th>
-            <Th className="table-h ml-40">Duration</Th>
-            <Th className="table-h ml-12">Prices</Th>
+      <Table className="rounded-xl border border-richblack-600">
+        <Thead className="border-none sm:border-b border-richblack-300 px-6 py-2 space-y-3">
+          <Tr className="text-richblack-100 space-y-8">
+            <Th className="table-h text-white"><span className="text-richblack-100">Courses</span></Th>
+            <Th className="table-h ">Duration</Th>
+            <Th className="table-h ">Prices</Th>
             <Th className="table-h">Actions</Th>
           </Tr>
         </Thead>
@@ -58,47 +58,49 @@ export const CourseTable = ({ courses, setCourses }) => {
             courses.map((course) => (
               <Tr
                 key={course._id}
-                className="flex justify-between pr-20 border-b border-richblack-800 py-8"
+                className=" border-b space-y-3 border-richblack-800"
               >
-                <Td className="flex">
-                  <img
-                    src={course?.thumbnail}
-                    alt={course?.courseName}
-                    className="h-[148px] w-[220px] rounded-lg object-cover"
-                  />
+                <Td>
+                  <div className="flex md:flex-row flex-col">
+                    <img
+                      src={course?.thumbnail}
+                      alt={course?.courseName}
+                      className="h-[148px] w-[220px] rounded-lg object-cover"
+                    />
 
-                  <span className="flex flex-col justify-between">
-                    <p className="text-lg font-semibold text-richblack-5">
-                      {course.courseName}
-                    </p>
-                    <p className="text-xs text-richblack-300">
-                    {course.description.split(" ").length >
-                      SCLICE_LENGTH
-                        ? course.courseDescription
-                            .split(" ")
-                            .slice(0, SCLICE_LENGTH)
-                            .join(" ") + "..."
-                        : course.courseDescription}
-                    </p>
-                    <p className="text-[12px] text-white">
-                      Created: {formattedDate(course.createdAt)}
-                    </p>
-                    {course.status === "Draft" ? (
-                      <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-pink-100">
-                        <HiClock size={14} />
-                        Drafted
+                    <span className="flex flex-col gap-1 items-center sm:items-start md:gap-0 md:justify-between">
+                      <p className="text-lg font-semibold text-richblack-5">
+                        {course.courseName}
                       </p>
-                    ) : (
-                      <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
-                        <span className="flex h-3 w-3 items-center justify-center rounded-full bg-yellow-100 text-richblack-700">
-                          <FaCheck size={8} />
-                        </span>
-                        Published
-                      </p>)}
-                  </span>
+                      <p className="text-xs text-richblack-300">
+                      {course.description.split(" ").length >
+                        SCLICE_LENGTH
+                          ? course.courseDescription
+                              .split(" ")
+                              .slice(0, SCLICE_LENGTH)
+                              .join(" ") + "..."
+                          : course.courseDescription}
+                      </p>
+                      <p className="text-[12px] text-white">
+                        Created: {formattedDate(course.createdAt)}
+                      </p>
+                      {course.status === "Draft" ? (
+                        <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-pink-100">
+                          <HiClock size={14} />
+                          Drafted
+                        </p>
+                      ) : (
+                        <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
+                          <span className="flex h-3 w-3 items-center justify-center rounded-full bg-yellow-100 text-richblack-700">
+                            <FaCheck size={8} />
+                          </span>
+                          Published
+                        </p>)}
+                    </span>
+                  </div>
                 </Td>
-                <Td className="table-d mr-40 -ml-10">2hr 30min</Td>
-                <Td className="table-d -ml-28">₹{course.price}</Td>
+                <Td className="table-d ">2hr 30min</Td>
+                <Td className="table-d ">₹{course.price}</Td>
 
                 <Td className="table-d">
                   <button

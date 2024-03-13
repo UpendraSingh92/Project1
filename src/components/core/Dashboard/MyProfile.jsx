@@ -23,21 +23,21 @@ export const MyProfile = () => {
       <h1 className="mb-14 text-3xl font-medium text-richblack-5">
         My Profile
       </h1>
-      <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-        <div className="flex flex-col sm:flex-row items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-5 sm:p-8 px-12">
+        <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4">
           <img
             src={user?.image}
             alt={`profile-${user?.firstName}`}
             className="aspect-square w-[78px] rounded-full object-cover"
           />
-          <div className="space-y-1 text-center sm:text-start">
+          <div className="sm:space-y-1 text-center sm:text-start">
             <p className="text-lg font-semibold text-richblack-5">
               {user?.firstName + " " + user?.lastName}
             </p>
             <p className="text-sm text-richblack-300">{user?.email}</p>
           </div>
         </div>
-        <button className="yellow-btn"
+        <button className="yellow-btn mt-4 sm:mt-0"
           onClick={() => {
             navigate("/dashboard/setting");
           }}

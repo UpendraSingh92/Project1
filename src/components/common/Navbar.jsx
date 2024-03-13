@@ -179,14 +179,14 @@ export const Navbar = () => {
           <div className="invisible absolute left-[50%] translate-x-[-50%] translate-y-[35%] top-[20%] flex flex-col gap-1 rounded-md bg-richblack-5 p-2 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-max sm:w-[150px] lg:w-[200px] z-30">
             <div className="absolute left-[50%] top-0 translate-y-[-45%] translate-x-[80%] h-6 w-6 rotate-45 rounded bg-richblack-5"></div>
 
-            {sublink.map((val, index) => {
+            {catalogLink.length > 0 && catalogLink.map((val, index) => {
               return (
                 <Link
-                  to={val.link}
+                  to={`/catalog/${val.name.split(" ").join("-").toLowerCase()}`}
                   className="text-black font-normal text-lg px-3 py-2 rounded-lg hover:bg-richblack-50 cursor-pointer"
                   key={index}
                 >
-                  {val.title}
+                  {val.name}
                 </Link>
               );
             })}

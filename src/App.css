@@ -23,11 +23,11 @@ body {
 }
 
 .yellow-btn {
-  @apply py-3 px-5 font-semibold flex items-center justify-center gap-4 border-pure-greys-25 border-r-[1px] border-b-[1.2px] rounded-md hover:scale-90 transition-all duration-200 cursor-pointer bg-yellow-50 text-black 
+  @apply py-1 sm:py-3 px-3 sm:px-5 font-semibold flex items-center justify-center gap-4 border-pure-greys-25 border-r-[1px] border-b-[1.2px] rounded-md hover:scale-90 transition-all duration-200 cursor-pointer bg-yellow-50 text-black 
 }
 
 .black-btn{
-  @apply py-3 px-5 font-semibold flex items-center justify-center gap-4 border-pure-greys-25 border-r-[1px] border-b-[1.2px] rounded-md hover:scale-90 transition-all duration-200 cursor-pointer bg-pure-greys-100 text-black 
+  @apply py-1 sm:py-3 px-3 sm:px-5 font-semibold flex items-center justify-center gap-4 border-pure-greys-25 border-r-[1px] border-b-[1.2px] rounded-md hover:scale-90 transition-all duration-200 cursor-pointer bg-pure-greys-100 text-black 
 }
 
 .table-r{
@@ -39,5 +39,5 @@ body {
 }
 
 .table-d{
-  @apply text-sm font-medium text-richblack-100
+  @apply text-sm text-center font-medium text-richblack-100
 }

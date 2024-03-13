@@ -38,8 +38,8 @@ export const VideoDetailSidebar = ({slider, setReviewModal}) => {
   return (
     <>
         <div className={`flex h-[calc(100vh-60px)] w-[300px] max-w-[350px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 videoSidebar ${slider? "-translate-x-full absolute" : "translate-x-0"} transition-all duration-300`}>
-            <div className='mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-5 text-lg font-bold text-richblack-25'>
-              <div className="flex w-full items-center justify-between ">
+            <div className='mx-1 sm:mx-5 flex flex-col items-start justify-between gap-2 gap-y-4 border-b border-richblack-600 py-3 sm:py-5 text-lg font-bold text-richblack-25'>
+              <div className="flex sm:flex-row gap-3 sm:gap-0 flex-col w-full items-center justify-between ">
                 <button type='button' className='flex h-[35px] w-[35px] items-center justify-center rounded-full bg-richblack-100 p-1 text-richblack-700 hover:scale-90 duration-150' onClick={()=>{navigate("/dashboard/enrolled-courses")}}>
                   <IoIosArrowBack size={20} />
                 </button>
@@ -49,8 +49,8 @@ export const VideoDetailSidebar = ({slider, setReviewModal}) => {
                 </button>  
               </div>      
 
-              <div className="flex justify-between items-center pr-5 w-full">
-                <p>{courseEntireData?.courseName}</p>
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-between items-center w-full">
+                <p>{courseEntireData?.courseName} git and github</p>
                 <p className="text-sm font-semibold text-richblack-300">{completedLectures.length} / {totalNoOfLectures}</p>
               </div>
             </div>

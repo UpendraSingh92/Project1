@@ -37,7 +37,7 @@ export const EnrolledCourse = () => {
     fetchCourse();
   }, []);
 
-  return (<div className="-mt-5 text-white">
+  return (<div className="-mt-2 text-white">
       <h1 className="mb-14 text-3xl font-medium text-richblack-5">
         Enrolled Courses
       </h1>
@@ -51,18 +51,18 @@ export const EnrolledCourse = () => {
           ) : (
             <div>
               <div className="flex rounded-t-lg bg-richblack-500 text-richblack-5">
-                <p className="w-[45%] px-5 py-3">Course Name</p>
+                <p className="w-[35%] sm:w-[45%] px-5 py-3">Course Name</p>
                 <p className="flex-1 px-2 py-3">Durations</p>
                 <p className="flex-1 px-2 py-3">Progress</p>
               </div>
               <div>
                 {enrolledCourse.map((course, indx) => (
                   <div key={course._id} className={`flex items-center border border-richblack-700 ${indx === enrolledCourse.length - 1 ? "rounded-b-lg" : "rounded-none"}`}>
-                    <div className="flex w-[45%] cursor-pointer items-center gap-4 px-5 py-3" onClick={()=> navigate(`/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSections?.[0]?._id}`)}>
+                    <div className="flex w-[40%] sm:w-[45%] flex-col sm:flex-row cursor-pointer sm:items-center gap-4 px-5 py-3" onClick={()=> navigate(`/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSections?.[0]?._id}`)}>
                       <img src={course.thumbnail} alt="course_img" className="h-14 w-14 rounded-lg object-cover"/>
                       <div className="flex max-w-xs flex-col gap-2">
-                        <p className="font-semibold">{course.courseName}</p>
-                        <p className="text-xs text-richblack-300">
+                        <p className="sm:font-semibold">{course.courseName}</p>
+                        <p className="text-xs hidden sm:flex text-richblack-300">
                         {course.description.length > 50
                       ? `${course.description.slice(0, 50)}...`
                       : course.description}</p>
