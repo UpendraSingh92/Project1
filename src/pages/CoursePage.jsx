@@ -5,7 +5,7 @@ import { HiOutlineGlobeAlt } from "react-icons/hi"
 import { useNavigate, useParams } from 'react-router-dom'
 import { buyCourse } from '../services/operation/paymentAPI';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFullDetailsOfCourse } from '../services/operation/courseDetailsAPI';
+import { fetchCourseDetails } from '../services/operation/courseDetailsAPI';
 import { addToCart } from '../slices/cartSlice';
 import GetAvgRating from '../utils/avgRating';
 import { Fotter } from "../components/common/Fotter"
@@ -47,7 +47,7 @@ export const CoursePage = () => {
     }
 
     const fetchOneCourse = async()=>{
-      const courseInfo = await getFullDetailsOfCourse(courseId,token);
+      const courseInfo = await fetchCourseDetails(courseId);
       setResponse({...courseInfo?.courseDetails, totalDuration:courseInfo?.totalDuration});
 
       let result = GetAvgRating(courseInfo?.courseDetails?.ratingAndReview)
