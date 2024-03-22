@@ -48,15 +48,15 @@ export const CoursePage = () => {
 
     const fetchOneCourse = async()=>{
       const courseInfo = await getFullDetailsOfCourse(courseId,token);
-      setResponse({...courseInfo.courseDetails, totalDuration:courseInfo.totalDuration});
+      setResponse({...courseInfo?.courseDetails, totalDuration:courseInfo?.totalDuration});
 
       let result = GetAvgRating(courseInfo?.courseDetails?.ratingAndReview)
       setAvgReview(result);
-      console.log("hi" ,courseInfo.courseDetails);
+      console.log("hi" ,courseInfo?.courseDetails);
 
       let lecture = 0;
-      courseInfo.courseDetails.courseContent.forEach( (section) => {
-        lecture += section.subSections.length || 0;
+      courseInfo?.courseDetails?.courseContent?.forEach( (section) => {
+        lecture += section?.subSections?.length || 0;
       })
       setTotalLecture(lecture);
 
@@ -180,7 +180,7 @@ export const CoursePage = () => {
               <div className="flex flex-wrap justify-between gap-2">
                 <div className="flex gap-2">
                   <span>
-                    {response?.courseContent.length} {`section(s)`}
+                    {response?.courseContent?.length} {`section(s)`}
                   </span>
                   <span>
                     {totalLecture} {`lecture(s)`}
