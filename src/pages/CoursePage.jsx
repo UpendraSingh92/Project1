@@ -216,14 +216,14 @@ export const CoursePage = () => {
               <div className="flex items-center gap-4 py-4">
                 <img
                   src={
-                    response?.instructor.image
-                      ? response?.instructor.image
-                      : `https://api.dicebear.com/5.x/initials/svg?seed=${response?.instructor.firstName} ${response?.instructor.lastName}`
+                    response?.instructor?.image
+                      ? response?.instructor?.image
+                      : `https://api.dicebear.com/5.x/initials/svg?seed=${response?.instructor?.firstName} ${response?.instructor?.lastName}`
                   }
                   alt="Author"
                   className="h-14 w-14 rounded-full object-cover"
                 />
-                <p className="text-lg">{`${response?.instructor.firstName} ${response?.instructor.lastName}`}</p>
+                <p className="text-lg">{`${response?.instructor?.firstName} ${response?.instructor?.lastName}`}</p>
               </div>
               <p className="text-richblack-50">
                 {response?.instructor?.additionalDetails?.about}
