@@ -86,7 +86,7 @@ export const CoursePage = () => {
               <div className="relative block max-h-[30rem] lg:hidden">
                 <div className="absolute bottom-0 left-0 h-full w-full shadow-[#161D29_0px_-64px_36px_-28px_inset]"></div>
                 <img
-                  src={response.thumbnail}
+                  src={response?.thumbnail}
                   alt="course thumbnail"
                   className="aspect-auto w-full"
                 />
@@ -96,31 +96,31 @@ export const CoursePage = () => {
               >
                 <div>
                   <p className="text-4xl font-bold text-richblack-5 sm:text-[42px]">
-                    {response.courseName} 
+                    {response?.courseName} 
                   </p>
                 </div>
                 <p className={`text-richblack-200`}>
-                  {response.description} 
+                  {response?.description} 
                 </p>
                 <div className="text-md flex flex-wrap items-center gap-2">
                   <span className="text-yellow-25">{avgReview}</span>
                   <RatingStars Review_Count={avgReview} Star_Size={24} />
                   <span>
-                    {`(${response.ratingAndReview.length} reviews)`} 
+                    {`(${response?.ratingAndReview?.length} reviews)`} 
                   </span>
                 </div>
                   <div>
-                    {`${response.studentEnrolled.length} students enrolled`}
+                    {`${response?.studentEnrolled?.length} students enrolled`}
                   </div>
                 <div>
                   <p className="">
-                    Created By {`${response.instructor.firstName} ${response.instructor.lastName}`}
+                    Created By {`${response?.instructor?.firstName} ${response?.instructor?.lastName}`}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-5 text-lg">
                   <p className="flex items-center gap-2">
                     {" "}
-                    <BiInfoCircle /> Created at {(response.createdAt).split("T")[0]}
+                    <BiInfoCircle /> Created at {(response.createdAt)?.split("T")?.at(0)}
                   </p>
                   <p className="flex items-center gap-2">
                     {" "}
