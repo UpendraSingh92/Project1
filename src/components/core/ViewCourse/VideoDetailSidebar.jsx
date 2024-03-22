@@ -50,7 +50,7 @@ export const VideoDetailSidebar = ({slider, setReviewModal}) => {
               </div>      
 
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-between items-center w-full">
-                <p>{courseEntireData?.courseName} git and github</p>
+                <p>{courseEntireData?.courseName}</p>
                 <p className="text-sm font-semibold text-richblack-300">{completedLectures.length} / {totalNoOfLectures}</p>
               </div>
             </div>
