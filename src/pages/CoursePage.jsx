@@ -48,14 +48,14 @@ export const CoursePage = () => {
 
     const fetchOneCourse = async()=>{
       const courseInfo = await fetchCourseDetails(courseId);
-      setResponse({...courseInfo?.courseDetails, totalDuration:courseInfo?.totalDuration});
+      setResponse({...courseInfo?.course, totalDuration:courseInfo?.totalDuration});
 
-      let result = GetAvgRating(courseInfo?.courseDetails?.ratingAndReview)
+      let result = GetAvgRating(courseInfo?.course?.ratingAndReview)
       setAvgReview(result);
-      console.log("hi" ,courseInfo?.courseDetails);
+      console.log("hi" ,courseInfo);
 
       let lecture = 0;
-      courseInfo?.courseDetails?.courseContent?.forEach( (section) => {
+      courseInfo?.course?.courseContent?.forEach( (section) => {
         lecture += section?.subSections?.length || 0;
       })
       setTotalLecture(lecture);

@@ -178,9 +178,20 @@ exports.courseDetail = async(req,res)=>{
             });
         }
 
+        let totalDurationInSeconds = 0
+        fullCourse.courseContent.forEach((content) => {
+          content.subSections.forEach((subSec) => {
+            const timeDurationInSeconds = parseInt(subSec.timeDuration)
+            totalDurationInSeconds += timeDurationInSeconds
+          })
+        })
+    
+        const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+    
         res.status(200).json({
             success: true,
             course:fullCourse,
+            totalDuration,
             message: "Course full detail fetch successful",
         });
 
